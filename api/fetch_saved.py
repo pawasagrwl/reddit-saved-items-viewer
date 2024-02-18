@@ -58,7 +58,7 @@ def fetch_and_save_saved_posts_comments():
             "content": saved_items
         }
         try:
-            with open("saved_items.json", "w") as outfile:
+            with open("../public/saved_items.json", "w") as outfile:
                 json.dump(final_output, outfile, indent=4)
         except Exception as e:
             print(f"Failed to save data to file: {e}")
