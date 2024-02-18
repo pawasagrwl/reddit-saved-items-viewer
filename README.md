@@ -1,46 +1,73 @@
-# Getting Started with Create React App
+# Reddit Saved Items Viewer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Reddit Saved Items Viewer is a React-based application that allows users to view, search, and categorize their saved posts and comments from Reddit. The application uses a Python script to fetch saved items from a user's Reddit account and save them into a JSON format, which then can be viewed through the React interface.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **View Saved Posts and Comments**: Easily view all your saved Reddit posts and comments in one place.
+- **Search Functionality**: Search through your saved posts and comments based on keywords.
+- **Categorization and Sorting**: Organize your saved items by subreddit or other criteria, and sort them according to your preference.
+- **Dark Theme Support**: A user-friendly interface that supports dark theme for comfortable viewing.
 
-### `npm start`
+## Getting Started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Prerequisites
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Before setting up the Reddit Saved Items Viewer, ensure you have the following installed:
+- Node.js (v14 or later recommended)
+- Python 3 (v3.7 or later recommended)
+- npm (usually comes with Node.js)
 
-### `npm test`
+### Initial Setup
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. **Clone the Repository**
 
-### `npm run build`
+    ```bash
+    git clone https://github.com/yourusername/reddit-saved-items-viewer.git
+    cd reddit-saved-items-viewer
+    ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. **Install Dependencies**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    In the project directory, run:
+    
+    ```bash
+    npm install
+    ```
 
-### `npm run eject`
+3. **Python Script Setup**
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+    Running the Python script is essential for the initial data fetch. Before running the application for the first time, please refer to the [README](api/README.md) within the `api/` directory for instructions on setting up and running the Python script. Ensure you have your `.env` file configured as per the instructions.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    The Python script must be executed successfully to generate the `saved_items.json` file, which is crucial for the application to run properly.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Running the Application
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+After setting up the Python script:
 
-## Learn More
+1. **Fetch Saved Items** (Optional)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+    If you want to fetch the latest saved items from your Reddit account, run:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+    ```bash
+    npm run start-api
+    ```
+
+    This will prompt you whether you wish to pull new saved posts and comments.
+
+2. **Start the React Application**
+    ```
+    npm start
+    ```
+
+    This command runs the app in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+## Usage
+
+Once the application is running, you can view your saved Reddit posts and comments. Use the search bar to filter items based on keywords, and use the categorization options to organize your view.
+
+
+
+
+
