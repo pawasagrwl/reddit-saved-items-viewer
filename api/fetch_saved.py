@@ -31,7 +31,7 @@ def fetch_and_save_saved_posts_comments():
                     "title": item.title,
                     "url": f"https://reddit.com{item.permalink}",  # Ensures post URL is the Reddit link
                     "subreddit": str(item.subreddit),
-                    "body": item.selftext if item.selftext else "no body content",
+                    "body": item.selftext if item.selftext else "",
                     "media": item.url,  # Directly use item.url for media
                     "datetime": get_readable_datetime(item.created_utc),  # Convert UTC timestamp to readable datetime
                     "votes": item.score  # Number of votes
@@ -40,6 +40,7 @@ def fetch_and_save_saved_posts_comments():
             else:  # This is a comment
                 comment_data = {
                     "post_title": item.submission.title,
+                    "post_subreddit": str(item.submission.subreddit),
                     "post_url": f"https://reddit.com{item.submission.permalink}",  # Use permalink for consistency
                     "post_media": item.submission.url,
                     "comment_url": f"https://reddit.com{item.permalink}",

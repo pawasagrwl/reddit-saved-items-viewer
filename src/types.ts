@@ -1,4 +1,4 @@
-// src/RedditSavedItemsTypes.ts
+// src/types.ts
 
 export interface Post {
   title: string;
@@ -12,6 +12,7 @@ export interface Post {
 
 export interface Comment {
   post_title: string;
+  post_subreddit: string;
   post_url: string;
   post_media: string;
   comment_url: string;

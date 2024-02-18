@@ -1,62 +1,40 @@
 // src/App.tsx
 
-import React, { useEffect, useState } from "react";
-import { SavedItems } from "./types";
+import React, { useState, useEffect } from 'react';
+import Header from './components/Header';
+import ContentTabs from './components/ContentTabs';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import { SavedItems } from './types'; // Importing the type you have already defined
 
 const App: React.FC = () => {
+  const [darkMode, setDarkMode] = useState(false);
   const [savedItems, setSavedItems] = useState<SavedItems | null>(null);
 
   useEffect(() => {
-    fetch("saved_items.json") // Adjust the path as necessary
+    // Fetch the saved items from the public folder
+    fetch('/saved_items.json')
       .then((response) => response.json())
       .then((data: SavedItems) => setSavedItems(data))
-      .catch((error) => console.error("Error fetching saved items:", error));
+      .catch((error) => console.error('Error fetching saved items:', error));
   }, []);
 
-  // Continuing from the previous App.tsx code
+  const theme = createTheme({
+    palette: {
+      mode: darkMode ? 'dark' : 'light',
+    },
+  });
+
+  const handleThemeChange = () => {
+    setDarkMode(!darkMode);
+  };
 
   return (
-    <div>
-      <h1>Saved Reddit Items</h1>
-      {savedItems ? (
-        <>
-          <h2>Posts</h2>
-          <ul>
-            {savedItems.content.posts.map((post, index) => (
-              <li key={index}>
-                <h3>
-                  {post.title} ({post.votes} votes)
-                </h3>
-                <p>
-                  {post.subreddit} - {new Date(post.datetime).toLocaleString()}
-                </p>
-                <p>{post.body}</p>
-                <a href={post.url} target="_blank">
-                  Read more
-                </a>
-              </li>
-            ))}
-          </ul>
-          <h2>Comments132</h2>
-          <ul>
-            {savedItems.content.comments.map((comment, index) => (
-              <li key={index}>
-                <h3>
-                  {comment.post_title} ({comment.votes} votes)
-                </h3>
-                <p>{new Date(comment.datetime).toLocaleString()}</p>
-                <p>{comment.comment_text}</p>
-                <a href={comment.comment_url} target="_blank">
-                  Read comment
-                </a>
-              </li>
-            ))}
-          </ul>
-        </>
-      ) : (
-        <p>Loading saved items...</p>
-      )}
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Header darkMode={darkMode} handleThemeChange={handleThemeChange} />
+      {savedItems && <ContentTabs posts={savedItems.content.posts} comments={savedItems.content.comments} />}
+    </ThemeProvider>
   );
 };
 
