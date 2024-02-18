@@ -32,6 +32,8 @@ const PostCard: React.FC<PostCardProps> = ({
       <CardContent>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
           r/{subreddit}
+          {new Date(datetime).toLocaleDateString()}{" "}
+          {new Date(datetime).toLocaleTimeString()}
         </Typography>
         <Typography
           variant="h5"
@@ -43,21 +45,20 @@ const PostCard: React.FC<PostCardProps> = ({
           }}
         >
           {title}
-          <Typography
+          {/* <Typography
             component="span"
             variant="body2"
             sx={{ marginLeft: "auto", fontSize: "0.8rem" }}
-          >
-            {new Date(datetime).toLocaleDateString()}{" "}
-            {new Date(datetime).toLocaleTimeString()}
-          </Typography>
+          > */}
+
+          {/* </Typography> */}
         </Typography>
         <TruncatedText text={body} />
         {/* Display media if exists */}
         {media && (
           <img
             src={media}
-            alt={title}
+            alt={""}
             style={{ maxWidth: "100%", marginTop: "10px" }}
           />
         )}
@@ -66,10 +67,12 @@ const PostCard: React.FC<PostCardProps> = ({
         <Typography sx={{ marginLeft: "10px" }}>{votes} votes</Typography>
         <Box>
           <Button
+            variant="contained"
             size="small"
             href={url}
             target="_blank"
             rel="noopener noreferrer"
+            sx={{ mr: 1 }}
           >
             Post Link
           </Button>{" "}

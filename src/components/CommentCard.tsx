@@ -59,18 +59,22 @@ const CommentCard: React.FC<CommentCardProps> = ({
         <Typography sx={{ marginLeft: "10px" }}>{votes} votes</Typography>
         <Box>
           <Button
+            variant="contained"
             size="small"
             href={postUrl}
             target="_blank"
             rel="noopener noreferrer"
+            sx={{ mr: 1 }}
           >
             Post Link
           </Button>
           <Button
+            variant="contained"
             size="small"
             href={commentUrl}
             target="_blank"
             rel="noopener noreferrer"
+            sx={{ mr: 1 }}
           >
             Comment Link
           </Button>
