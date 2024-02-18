@@ -24,6 +24,11 @@ export interface Comment {
 export interface SavedItems {
   last_pulled: string;
   content: {
+    subreddits: string[];
+    least_votes: number,
+    most_votes: number,
+    earliest: string,
+    latest: string,
     posts: Post[];
     comments: Comment[];
   };
