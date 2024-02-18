@@ -24,3 +24,5 @@ yarn-error.log*
 
 api/saved_items.json
 api/.env
+
+public/saved_items.json

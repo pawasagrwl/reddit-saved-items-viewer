@@ -4,7 +4,7 @@ const fs = require('fs').promises; // Use promises version for async/await
 (async () => {
   try {
     // Read and parse the JSON file
-    const data = await fs.readFile('./api/saved_items.json', 'utf8');
+    const data = await fs.readFile('./public/saved_items.json', 'utf8');
     const savedItems = JSON.parse(data);
     const lastPulled = savedItems.last_pulled;
 
