@@ -66,7 +66,7 @@ const CommentCard: React.FC<CommentCardProps> = ({
             rel="noopener noreferrer"
             sx={{ mr: 1 }}
           >
-            Post Link
+            Open Post
           </Button>
           <Button
             variant="contained"
@@ -76,7 +76,7 @@ const CommentCard: React.FC<CommentCardProps> = ({
             rel="noopener noreferrer"
             sx={{ mr: 1 }}
           >
-            Comment Link
+            Open Comment
           </Button>
         </Box>
       </CardActions>

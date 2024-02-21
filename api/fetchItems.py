@@ -1,29 +1,47 @@
 from datetime import datetime
 from dotenv import load_dotenv
-import os
-import praw
-import json
+import os, praw, json, time
 
 # Load environment variables from .env file
 load_dotenv()
 
+BOLD = '\033[1m'
+YELLOW = '\033[93m'
+RESET = '\033[0m'
+
 def get_readable_datetime(utc_timestamp):
-    """
-    Convert a UTC timestamp to a human-readable datetime string.
-    
-    Parameters:
-    - utc_timestamp: The UTC timestamp to convert.
-    
-    Returns:
-    - A string representing the formatted datetime.
-    """
     return datetime.utcfromtimestamp(utc_timestamp).strftime('%Y-%m-%d %H:%M:%S')
 
+def initialize_counts(vote_ranges):
+    """Initialize the structure for counting posts and comments separately."""
+    
+    counts = {
+        "subreddits": {},
+        "votes": {f"{range_[0]}-{range_[1]}": {"posts": 0, "comments": 0} for range_ in vote_ranges},
+        "dates": {}
+    }
+    return counts
+
+def update_counts(counts, item, is_post, vote_ranges):
+    """Update counts for subreddits, votes, and dates based on the item."""
+    
+    type_ = "posts" if is_post else "comments"
+    subreddit_name = str(item.subreddit if hasattr(item, 'subreddit') else item.submission.subreddit)
+    subreddit_counts = counts["subreddits"].setdefault(subreddit_name, {"posts": 0, "comments": 0})
+    subreddit_counts[type_] += 1
+
+    for range_ in vote_ranges:
+        range_key = f"{range_[0]}-{range_[1]}"
+        if range_[0] <= item.score < range_[1]:
+            counts["votes"][range_key][type_] += 1
+            break
+
+    year_month = datetime.utcfromtimestamp(item.created_utc).strftime('%Y-%m')
+    date_counts = counts["dates"].setdefault(year_month, {"posts": 0, "comments": 0})
+    date_counts[type_] += 1
+
 def fetch_saved_items():
-    """
-    Fetches saved posts and comments from a Reddit account and saves them to a JSON file.
-    """
-    # Initialize Reddit instance with credentials from environment variables
+    
     reddit = praw.Reddit(
         client_id=os.getenv("REDDIT_CLIENT_ID"),
         client_secret=os.getenv("REDDIT_CLIENT_SECRET"),
@@ -32,21 +50,21 @@ def fetch_saved_items():
         username=os.getenv("REDDIT_USERNAME"),
     )
 
-    # Initialize structures to store fetched data
     saved_items = {"posts": [], "comments": []}
-    subreddits = set()
-    votes = []
-    dates = []
+    vote_ranges = [(0, 100), (100, 1000), (1000, 10000), (10000, 100000), (100000, 1000000)]
+    counts = initialize_counts(vote_ranges)
 
     try:
         count = 0
-        # Iterate through saved items in the Reddit account
+        start_time = time.time()  # Capture start time
         for item in reddit.user.me().saved(limit=None):
             count += 1
             print(f"{count} items processed", end='\r', flush=True)
+
+            is_post = hasattr(item, 'title')
+            update_counts(counts, item, is_post, vote_ranges)
             
-            # Check if the item is a post or comment and process accordingly
-            if hasattr(item, 'title'):  # Post
+            if is_post:  # Post
                 post_data = {
                     "title": item.title,
                     "url": f"https://reddit.com{item.permalink}",
@@ -54,9 +72,11 @@ def fetch_saved_items():
                     "body": item.selftext if item.selftext else "",
                     "media": item.url,
                     "datetime": get_readable_datetime(item.created_utc),
-                    "votes": item.score
+                    "votes": item.score,
                 }
+                
                 saved_items["posts"].append(post_data)
+            
             else:  # Comment
                 comment_data = {
                     "post_title": item.link_title,
@@ -67,36 +87,28 @@ def fetch_saved_items():
                     "datetime": get_readable_datetime(item.created_utc),
                     "votes": item.score
                 }
+                
                 saved_items["comments"].append(comment_data)
 
-            # Collect subreddit names, votes, and dates for further analysis
-            subreddits.add(str(item.subreddit if hasattr(item, 'subreddit') else item.submission.subreddit))
-            votes.append(item.score)
-            dates.append(item.created_utc)
-
-        # Prepare the final output structure
         final_output = {
             "last_pulled": datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S'),
-            "content": {
-                "subreddits": sorted(list(subreddits), key=str.lower),
-                "least_votes": min(votes),
-                "most_votes": max(votes),
-                "earliest": get_readable_datetime(min(dates)),
-                "latest": get_readable_datetime(max(dates)),
-                "posts": saved_items["posts"],
-                "comments": saved_items["comments"]
-            }
+            "counts": counts,
+            "content": saved_items
         }
-
+        
+        elapsed_time = time.time() - start_time
+        
+        print(f"Completed fetching items in {elapsed_time:.2f} seconds.")
+        
     except Exception as e:
         print(f"An error occurred: {e}")
         final_output = {}
-
-    # Write the collected data to a JSON file
+    
+    
     with open("saved_items.json", "w") as outfile:
         json.dump(final_output, outfile, indent=4)
+    
     print("\nFinished processing items.")
 
-# Execute the main function to fetch and save Reddit saved items
 if __name__ == "__main__":
     fetch_saved_items()

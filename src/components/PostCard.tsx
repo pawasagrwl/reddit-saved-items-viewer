@@ -45,13 +45,6 @@ const PostCard: React.FC<PostCardProps> = ({
           }}
         >
           {title}
-          {/* <Typography
-            component="span"
-            variant="body2"
-            sx={{ marginLeft: "auto", fontSize: "0.8rem" }}
-          > */}
-
-          {/* </Typography> */}
         </Typography>
         <TruncatedText text={body} />
         {/* Display media if exists */}
@@ -74,7 +67,7 @@ const PostCard: React.FC<PostCardProps> = ({
             rel="noopener noreferrer"
             sx={{ mr: 1 }}
           >
-            Post Link
+            Open Post
           </Button>{" "}
         </Box>
       </CardActions>

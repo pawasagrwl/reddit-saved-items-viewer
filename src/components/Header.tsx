@@ -1,9 +1,13 @@
-// src/components/Header.tsx
-
 import React from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import {
+  FormControl,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from "@mui/material";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import IconButton from "@mui/material/IconButton";
@@ -53,9 +57,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 interface HeaderProps {
   darkMode: boolean;
   handleThemeChange: () => void;
+  handleSortChange: (sortValue: string) => void;
+  currentSort: string;
 }
 
-const Header: React.FC<HeaderProps> = ({ darkMode, handleThemeChange }) => {
+const Header: React.FC<HeaderProps> = ({
+  darkMode,
+  handleThemeChange,
+  handleSortChange,
+  currentSort,
+}) => {
   return (
     <AppBar position="sticky">
       <Toolbar>
@@ -71,6 +82,25 @@ const Header: React.FC<HeaderProps> = ({ darkMode, handleThemeChange }) => {
             inputProps={{ "aria-label": "search" }}
           />
         </Search>
+        <FormControl
+          variant="outlined"
+          size="small"
+          sx={{ m: 1, minWidth: 120 }}
+        >
+          <Select
+            value={currentSort}
+            onChange={(event: SelectChangeEvent) =>
+              handleSortChange(event.target.value as string)
+            }
+            displayEmpty
+            inputProps={{ "aria-label": "Sort by" }}
+          >
+            <MenuItem value="newest">Newest</MenuItem>
+            <MenuItem value="oldest">Oldest</MenuItem>
+            <MenuItem value="highest_votes">Highest Votes</MenuItem>
+            <MenuItem value="lowest_votes">Lowest Votes</MenuItem>
+          </Select>
+        </FormControl>
         <IconButton color="inherit" onClick={handleThemeChange}>
           {darkMode ? <Brightness7Icon /> : <Brightness4Icon />}
         </IconButton>

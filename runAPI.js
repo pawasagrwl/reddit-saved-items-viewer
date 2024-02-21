@@ -23,7 +23,7 @@ async function moveFile() {
  */
 function runPythonScriptAndMoveFile() {
   console.log("Running Python script to fetch saved items...");
-  exec("python ./api/fetch_saved.py", (err, stdout) => {
+  exec("python ./api/fetchItems.py", (err, stdout) => {
     if (err) {
       console.error(`exec error: ${err}`);
       return;

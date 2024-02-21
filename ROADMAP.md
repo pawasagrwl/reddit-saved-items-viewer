@@ -1,4 +1,7 @@
-Based on your UI layout preferences, here is a breakdown of the components and their functionality:
+1. API Calls limit
+2. does calling images and videos count as api call
+3. gallery, unloadable media
+4. fetch comments for post through different file
 
 ### UI Component Structure
 
