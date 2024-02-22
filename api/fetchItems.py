@@ -49,7 +49,6 @@ def fetch_saved_items():
         user_agent=f"Fetch Saved Posts and Comments by /u/{os.getenv('REDDIT_USERNAME')}",
         username=os.getenv("REDDIT_USERNAME"),
     )
-
     saved_items = {"posts": [], "comments": []}
     vote_ranges = [(0, 100), (100, 1000), (1000, 10000), (10000, 100000), (100000, 1000000)]
     counts = initialize_counts(vote_ranges)
@@ -57,7 +56,9 @@ def fetch_saved_items():
     try:
         count = 0
         start_time = time.time()  # Capture start time
-        for item in reddit.user.me().saved(limit=None):
+        items = reddit.user.me().saved(limit=None)
+        for item in items:
+            
             count += 1
             print(f"{count} items processed", end='\r', flush=True)
 

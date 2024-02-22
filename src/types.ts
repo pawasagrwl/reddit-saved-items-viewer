@@ -14,21 +14,22 @@ export interface Comment {
   post_title: string;
   post_subreddit: string;
   post_url: string;
-  post_media: string;
   comment_url: string;
   comment_text: string;
   datetime: string;
   votes: number;
 }
 
+export interface Counts {
+  subreddits: { [key: string]: { posts: number, comments: number } };
+  votes: { [key: string]: { posts: number, comments: number } };
+  dates: { [key: string]: { posts: number, comments: number } };
+}
+
 export interface SavedItems {
   last_pulled: string;
+  counts: Counts;
   content: {
-    subreddits: string[];
-    least_votes: number,
-    most_votes: number,
-    earliest: string,
-    latest: string,
     posts: Post[];
     comments: Comment[];
   };
