@@ -1,6 +1,6 @@
 // src/components/PostCard.tsx
 
-import React from "react";
+import React, { useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
@@ -27,6 +27,7 @@ const PostCard: React.FC<PostCardProps> = ({
   votes,
   url,
 }) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
   return (
     <Card sx={{ margin: 2 }}>
       <CardContent>
@@ -49,11 +50,22 @@ const PostCard: React.FC<PostCardProps> = ({
         <TruncatedText text={body} />
         {/* Display media if exists */}
         {media && (
-          <img
-            src={media}
-            alt={""}
-            style={{ maxWidth: "100%", marginTop: "10px" }}
-          />
+          <>
+            <img
+              src={media}
+              alt={title}
+              style={{
+                maxWidth: "100%",
+                marginTop: "10px",
+                display: imageLoaded ? "block" : "none",
+              }}
+              onLoad={() => setImageLoaded(true)}
+              loading="lazy"
+            />
+            {!imageLoaded && (
+              <div style={{ marginTop: "10px" }}>Loading image...</div>
+            )}
+          </>
         )}
       </CardContent>
       <CardActions sx={{ display: "flex", justifyContent: "space-between" }}>

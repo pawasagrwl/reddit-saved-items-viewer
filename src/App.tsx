@@ -5,7 +5,7 @@ import Header from "./components/Header";
 import ContentTabs from "./components/ContentTabs";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import { SavedItems, Post, Comment } from "./types"; // Importing the type you have already defined
+import { SavedItems, Post, Comment } from "./types";
 
 const App: React.FC = () => {
   const [darkMode, setDarkMode] = useState(false);
