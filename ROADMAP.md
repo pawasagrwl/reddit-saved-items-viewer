@@ -1,64 +1,9 @@
-1. API Calls limit
-2. does calling images and videos count as api call
-3. gallery, unloadable media
-4. fetch comments for post through different file
 
-### UI Component Structure
+1. Show number of posts and comments on tabs
+2. Button to load media instead of auto loading (or auto load for only first 5 posts)
+2. 
 
-#### 1. Header
-- **SearchBar**: A full-width bar at the top. Inside it, there's a text input for search queries and a search button.
-- **ThemeToggleButton**: A button to toggle between light and dark themes, positioned on the right within the header.
 
-#### 2. Filters Section
-- **CategorizationDropdowns**: Dropdown menus for filtering by subreddit, year, month, and minimum votes. They should be able to work in combination or independently.
-- **SortButtons**: Buttons or dropdowns to sort by time or votes. Changing an option should immediately update the displayed content.
-
-#### 3. Content Area
-- **Tabs**: "Posts" and "Comments" tabs, each containing a scrollable window with infinite scroll functionality.
-- **PostCard**: A card displaying the post title, subreddit, timestamp, body, media, number of votes, and a link to the post.
-- **CommentCard**: A card similar to the PostCard but also includes the comment text and a link to the comment itself.
-
-#### 4. Styling
-- **Sticky Header**: The header and filters section should be fixed at the top, so they remain accessible even when scrolling through content.
-- **Responsive Design**: The layout should adapt to different screen sizes, ensuring mobile-friendliness.
-
-### Component Pseudocode
-
-Here's a high-level pseudocode of how you might structure these components in your application:
-
-```jsx
-<Header>
-  <SearchBar>
-    <SearchInput />
-    <SearchButton />
-  </SearchBar>
-  <ThemeToggleButton />
-</Header>
-
-<Filters>
-  <CategorizationDropdown name="Subreddit" options={subreddits} />
-  <CategorizationDropdown name="Year" options={years} />
-  <CategorizationDropdown name="Month" options={months} />
-  <CategorizationDropdown name="Minimum Votes" options={voteThresholds} />
-  <SortButton name="Time" />
-  <SortButton name="Votes" />
-</Filters>
-
-<ContentArea>
-  <Tabs defaultActiveTab="Posts">
-    <Tab name="Posts">
-      <InfiniteScrollContainer>
-        {filteredAndSortedPosts.map(post => <PostCard key={post.id} {...post} />)}
-      </InfiniteScrollContainer>
-    </Tab>
-    <Tab name="Comments">
-      <InfiniteScrollContainer>
-        {filteredAndSortedComments.map(comment => <CommentCard key={comment.id} {...comment} />)}
-      </InfiniteScrollContainer>
-    </Tab>
-  </Tabs>
-</ContentArea>
-```
 
 ### Additional Notes
 

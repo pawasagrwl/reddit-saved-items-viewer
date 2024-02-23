@@ -8,15 +8,7 @@ import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
 import TruncatedText from "./TruncatedText";
 import Box from "@mui/material/Box";
-interface CommentCardProps {
-  postTitle: string;
-  subreddit: string;
-  datetime: string;
-  commentText: string;
-  votes: number;
-  postUrl: string;
-  commentUrl: string;
-}
+import { CommentCardProps } from "../types/componentTypes";
 
 const CommentCard: React.FC<CommentCardProps> = ({
   postTitle,

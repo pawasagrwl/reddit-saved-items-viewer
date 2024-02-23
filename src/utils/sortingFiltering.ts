@@ -98,31 +98,37 @@ export const getDropdownOptions = (
 ): { label: string; value: string }[] => {
   switch (filterType) {
     case "subreddit":
-      return Object.entries(data.counts.subreddits).map(([key, value]) => ({
-        label: `${key} (${value.posts})`,
-        value: key,
-      }));
+      return Object.entries(data.counts.subreddits)
+        .map(([key, value]) => ({
+          label: `${key} (${value.posts})`,
+          value: key,
+        }))
+        .sort((a, b) => a.label.localeCompare(b.label)); // Alphabetically sorts the subreddit options
     case "year":
       return [
         ...new Set(
           Object.keys(data.counts.dates).map((date) => date.split("-")[0])
         ),
-      ].map((year) => ({
-        label: year,
-        value: year,
-      }));
-    case "month":
-      if (!data.yearFilter) return [];
-      return [
-        ...new Set(
-          Object.keys(data.counts.dates)
-            .filter((date) => date.startsWith(data.yearFilter))
-            .map((date) => date.split("-")[1])
-        ),
-      ].map((month) => ({
-        label: month,
-        value: month,
-      }));
+      ]
+        .map((year) => ({
+          label: year,
+          value: year,
+        }))
+        .sort((a, b) => b.value.localeCompare(a.value)); // Sorts years from latest to earliest
+        case "month":
+          const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+          if (!data.yearFilter) return [];
+          return [
+            ...new Set(
+              Object.keys(data.counts.dates)
+                .filter((date) => date.startsWith(data.yearFilter))
+                .map((date) => date.split("-")[1])
+            ),
+          ].map((month) => ({
+            label: `${month} - ${monthNames[parseInt(month) - 1]}`,
+            value: month,
+          })).sort((a, b) => parseInt(a.value) - parseInt(b.value)); // Ensure sorting is correct if needed
+        
     case "votes":
       return Object.keys(data.counts.votes).map((range) => ({
         label: `${range} (${data.counts.votes[range].posts})`,

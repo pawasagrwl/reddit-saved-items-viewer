@@ -8,15 +8,7 @@ import CardActions from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
 import TruncatedText from "./TruncatedText";
 import Box from "@mui/material/Box";
-interface PostCardProps {
-  title: string;
-  subreddit: string;
-  datetime: string;
-  body: string;
-  media: string;
-  votes: number;
-  url: string;
-}
+import { PostCardProps } from "../types/componentTypes";
 
 const PostCard: React.FC<PostCardProps> = ({
   title,

@@ -5,7 +5,7 @@ import DropdownBar from "./components/DropdownBar";
 import { createTheme, ThemeProvider as MUIThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { useSavedItems } from './hooks/useSavedItems';
-import { sortData, filterPosts, filterComments, getDropdownOptions } from './utils/sortingFiltering';
+import { filterPosts, filterComments, getDropdownOptions } from './utils/sortingFiltering';
 import { useTheme } from './context/ThemeContext';
 
 const App: React.FC = () => {

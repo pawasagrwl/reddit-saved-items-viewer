@@ -2,18 +2,19 @@ import React from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import {
-  FormControl,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-} from "@mui/material";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import IconButton from "@mui/material/IconButton";
 import Brightness4Icon from "@mui/icons-material/Brightness4"; // dark mode icon
 import Brightness7Icon from "@mui/icons-material/Brightness7"; // light mode icon
 import { styled } from "@mui/material/styles";
+import {
+  FormControl,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from "@mui/material";
+import { HeaderProps } from "../types/componentTypes";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -53,13 +54,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
-
-interface HeaderProps {
-  darkMode: boolean;
-  handleThemeChange: () => void;
-  handleSortChange: (sortValue: string) => void;
-  currentSort: string;
-}
 
 const Header: React.FC<HeaderProps> = ({
   darkMode,

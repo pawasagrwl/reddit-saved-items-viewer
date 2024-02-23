@@ -1,5 +1,7 @@
 // src/types/componentTypes.ts
 
+import { Post } from "./savedItemsTypes";
+
 export interface DropdownProps {
   label: string;
   value: string;
@@ -10,4 +12,42 @@ export interface DropdownProps {
 export interface DropdownOption {
   label: string;
   value: string;
+}
+
+export interface CommentCardProps {
+  postTitle: string;
+  subreddit: string;
+  datetime: string;
+  commentText: string;
+  votes: number;
+  postUrl: string;
+  commentUrl: string;
+}
+
+export interface TabPanelProps {
+  children?: React.ReactNode;
+  index: any;
+  value: any;
+}
+
+export interface ContentTabsProps {
+  posts: Post[];
+  comments: Comment[];
+}
+
+export interface HeaderProps {
+  darkMode: boolean;
+  handleThemeChange: () => void;
+  handleSortChange: (sortValue: string) => void;
+  currentSort: string;
+}
+
+export interface PostCardProps {
+  title: string;
+  subreddit: string;
+  datetime: string;
+  body: string;
+  media: string;
+  votes: number;
+  url: string;
 }
