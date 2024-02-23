@@ -1,6 +1,6 @@
 // src/components/DropdownBar.tsx
 import React from "react";
-import Dropdown from "./Dropdown";
+import Dropdown from "./common/Dropdown";
 import { DropdownOption } from "../types/componentTypes"; // Adjust types as needed
 
 interface DropdownBarProps {

@@ -2,11 +2,11 @@
 import React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import { CommentCardProps } from "../types/componentTypes";
-import CardHeader from "./CardHeader";
-import CardBody from "./CardBody";
-import CardFooter from "./CardFooter";
-import CardTitle from "./CardTitle";
+import { CommentCardProps } from "../../types/componentTypes";
+import CardHeader from "../common/CardHeader";
+import CardBody from "../common/CardBody";
+import CardFooter from "../common/CardFooter";
+import CardTitle from "../common/CardTitle";
 
 const CommentCard: React.FC<CommentCardProps> = ({
   postTitle,

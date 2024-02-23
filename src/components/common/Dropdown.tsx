@@ -1,7 +1,7 @@
 // src/components/Dropdown.tsx
 import React from 'react';
 import { FormControl, InputLabel, Select, MenuItem, SelectChangeEvent } from '@mui/material';
-import { DropdownProps } from '../types/componentTypes'; // Adjust the import path as necessary
+import { DropdownProps } from '../../types/componentTypes'; // Adjust the import path as necessary
 
 const Dropdown: React.FC<DropdownProps> = ({ label, value, onChange, options }) => (
   <FormControl fullWidth margin="normal">

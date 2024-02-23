@@ -2,7 +2,7 @@ import React from 'react';
 import IconButton from '@mui/material/IconButton';
 import Brightness4Icon from '@mui/icons-material/Brightness4'; // dark mode icon
 import Brightness7Icon from '@mui/icons-material/Brightness7'; // light mode icon
-import { ThemeTogglerProps } from '../types/componentTypes';
+import { ThemeTogglerProps } from '../../types/componentTypes';
 
 const ThemeToggler: React.FC<ThemeTogglerProps> = ({ darkMode, toggleTheme }) => {
   return (

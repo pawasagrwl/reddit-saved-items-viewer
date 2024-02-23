@@ -2,11 +2,10 @@ import React from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { FormControl, MenuItem, Select, SelectChangeEvent } from "@mui/material";
-import SearchBar from './SearchBar'; // Import SearchBar
-import ThemeToggler from './ThemeToggler'; // Import ThemeToggler
+import SearchBar from './header/SearchBar'; // Import SearchBar
+import ThemeToggler from './header/ThemeToggler'; // Import ThemeToggler
 import { HeaderProps } from "../types/componentTypes";
-import SortSelector from './SortSelector';
+import SortSelector from './header/SortSelector';
 
 const Header: React.FC<HeaderProps> = ({
   darkMode,

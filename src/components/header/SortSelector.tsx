@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material';
-import { SortSelectorProps } from '../types/componentTypes';
+import { SortSelectorProps } from '../../types/componentTypes';
 
 const SortSelector: React.FC<SortSelectorProps> = ({ currentSort, handleSortChange }) => {
   const handleChange = (event: SelectChangeEvent) => {
