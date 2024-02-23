@@ -21,9 +21,9 @@ export interface Comment {
 }
 
 export interface Counts {
-  subreddits: { [key: string]: { posts: number, comments: number } };
-  votes: { [key: string]: { posts: number, comments: number } };
-  dates: { [key: string]: { posts: number, comments: number } };
+  subreddits: { [key: string]: { posts: number; comments: number } };
+  votes: { [key: string]: { posts: number; comments: number } };
+  dates: { [key: string]: { posts: number; comments: number } };
 }
 
 export interface SavedItems {

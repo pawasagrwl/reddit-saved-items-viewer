@@ -115,20 +115,35 @@ export const getDropdownOptions = (
           value: year,
         }))
         .sort((a, b) => b.value.localeCompare(a.value)); // Sorts years from latest to earliest
-        case "month":
-          const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-          if (!data.yearFilter) return [];
-          return [
-            ...new Set(
-              Object.keys(data.counts.dates)
-                .filter((date) => date.startsWith(data.yearFilter))
-                .map((date) => date.split("-")[1])
-            ),
-          ].map((month) => ({
-            label: `${month} - ${monthNames[parseInt(month) - 1]}`,
-            value: month,
-          })).sort((a, b) => parseInt(a.value) - parseInt(b.value)); // Ensure sorting is correct if needed
-        
+    case "month":
+      const monthNames = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
+      if (!data.yearFilter) return [];
+      return [
+        ...new Set(
+          Object.keys(data.counts.dates)
+            .filter((date) => date.startsWith(data.yearFilter))
+            .map((date) => date.split("-")[1])
+        ),
+      ]
+        .map((month) => ({
+          label: `${month} - ${monthNames[parseInt(month) - 1]}`,
+          value: month,
+        }))
+        .sort((a, b) => parseInt(a.value) - parseInt(b.value)); // Ensure sorting is correct if needed
+
     case "votes":
       return Object.keys(data.counts.votes).map((range) => ({
         label: `${range} (${data.counts.votes[range].posts})`,

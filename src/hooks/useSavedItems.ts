@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { SavedItems } from '../types/savedItemsTypes';
-import { sortData } from '../utils/sortingFiltering';
+import { useState, useEffect } from "react";
+import { SavedItems } from "../types/savedItemsTypes";
+import { sortData } from "../utils/sortingFiltering";
 
 export const useSavedItems = (currentSort: string) => {
   const [savedItems, setSavedItems] = useState<SavedItems | null>(null);
