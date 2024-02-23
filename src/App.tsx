@@ -2,11 +2,20 @@ import React, { useState } from "react";
 import Header from "./components/Header";
 import ContentTabs from "./components/ContentTabs";
 import DropdownBar from "./components/DropdownBar";
-import { createTheme, ThemeProvider as MUIThemeProvider } from "@mui/material/styles";
+
 import CssBaseline from "@mui/material/CssBaseline";
-import { useSavedItems } from './hooks/useSavedItems';
-import { filterPosts, filterComments, getDropdownOptions } from './utils/sortingFiltering';
-import { useTheme } from './context/ThemeContext';
+import { useSavedItems } from "./hooks/useSavedItems";
+
+import { useTheme } from "./context/ThemeContext";
+import {
+  createTheme,
+  ThemeProvider as MUIThemeProvider,
+} from "@mui/material/styles";
+import {
+  filterPosts,
+  filterComments,
+  getDropdownOptions,
+} from "./utils/sortingFiltering";
 
 const App: React.FC = () => {
   const [currentSort, setCurrentSort] = useState<string>("");
@@ -16,6 +25,8 @@ const App: React.FC = () => {
   const [votesFilter, setVotesFilter] = useState("");
   const { darkMode, toggleTheme } = useTheme();
   const { savedItems } = useSavedItems(currentSort);
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [preserveSearch, setPreserveSearch] = useState<boolean>(false);
 
   const theme = createTheme({
     palette: {
@@ -23,12 +34,36 @@ const App: React.FC = () => {
     },
   });
 
-  const filteredPosts = savedItems ? filterPosts(savedItems.content.posts, subredditFilter, yearFilter, monthFilter, votesFilter) : [];
-  const filteredComments = savedItems ? filterComments(savedItems.content.comments, subredditFilter, yearFilter, monthFilter, votesFilter) : [];
-  const subredditOptions = savedItems ? getDropdownOptions(savedItems, "subreddit") : [];
+  // Update the filteredPosts and filteredComments logic to include searchTerm and preserveSearch
+  let filteredPosts = savedItems
+    ? filterPosts(
+        savedItems.content.posts,
+        subredditFilter,
+        yearFilter,
+        monthFilter,
+        votesFilter
+      )
+    : [];
+  let filteredComments = savedItems
+    ? filterComments(
+        savedItems.content.comments,
+        subredditFilter,
+        yearFilter,
+        monthFilter,
+        votesFilter
+      )
+    : [];
+
+  const subredditOptions = savedItems
+    ? getDropdownOptions(savedItems, "subreddit")
+    : [];
   const yearOptions = savedItems ? getDropdownOptions(savedItems, "year") : [];
-  const monthOptions = savedItems ? getDropdownOptions(savedItems, "month") : [];
-  const votesOptions = savedItems ? getDropdownOptions(savedItems, "votes") : [];
+  const monthOptions = savedItems
+    ? getDropdownOptions(savedItems, "month")
+    : [];
+  const votesOptions = savedItems
+    ? getDropdownOptions(savedItems, "votes")
+    : [];
 
   return (
     <MUIThemeProvider theme={theme}>
@@ -38,8 +73,17 @@ const App: React.FC = () => {
         handleThemeChange={toggleTheme}
         handleSortChange={setCurrentSort}
         currentSort={currentSort}
+        searchTerm={searchTerm}
+        handleSearchChange={setSearchTerm}
       />
-      <div style={{ padding: "20px", display: "flex", justifyContent: "center", gap: "20px" }}>
+      <div
+        style={{
+          padding: "20px",
+          display: "flex",
+          justifyContent: "center",
+          gap: "20px",
+        }}
+      >
         <DropdownBar
           subredditFilter={subredditFilter}
           setSubredditFilter={setSubredditFilter}
@@ -55,10 +99,7 @@ const App: React.FC = () => {
           votesOptions={votesOptions}
         />
       </div>
-      <ContentTabs
-        posts={filteredPosts}
-        comments={filteredComments}
-      />
+      <ContentTabs posts={filteredPosts} comments={filteredComments} />
     </MUIThemeProvider>
   );
 };
