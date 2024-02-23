@@ -1,4 +1,4 @@
-// src/components/CardHeader.tsx
+// src/components/common/CardHeader.tsx
 import React from "react";
 import Typography from "@mui/material/Typography";
 
@@ -9,7 +9,8 @@ interface CardHeaderProps {
 
 const CardHeader: React.FC<CardHeaderProps> = ({ subreddit, datetime }) => (
   <Typography sx={{ mb: 1.5 }} color="text.secondary">
-    r/{subreddit} {new Date(datetime).toLocaleDateString()} {new Date(datetime).toLocaleTimeString()}
+    r/{subreddit} {new Date(datetime).toLocaleDateString()}{" "}
+    {new Date(datetime).toLocaleTimeString()}
   </Typography>
 );
 

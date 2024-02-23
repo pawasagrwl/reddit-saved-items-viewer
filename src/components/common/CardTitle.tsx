@@ -1,4 +1,4 @@
-// src/components/CardTitle.tsx
+// src/components/common/CardTitle.tsx
 import React from "react";
 import Typography from "@mui/material/Typography";
 

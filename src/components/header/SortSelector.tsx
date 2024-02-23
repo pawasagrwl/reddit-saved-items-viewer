@@ -1,8 +1,16 @@
-import React from 'react';
-import { FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/material';
-import { SortSelectorProps } from '../../types/componentTypes';
+import React from "react";
+import {
+  FormControl,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from "@mui/material";
+import { SortSelectorProps } from "../../types/componentTypes";
 
-const SortSelector: React.FC<SortSelectorProps> = ({ currentSort, handleSortChange }) => {
+const SortSelector: React.FC<SortSelectorProps> = ({
+  currentSort,
+  handleSortChange,
+}) => {
   const handleChange = (event: SelectChangeEvent) => {
     handleSortChange(event.target.value as string);
   };
@@ -13,7 +21,7 @@ const SortSelector: React.FC<SortSelectorProps> = ({ currentSort, handleSortChan
         value={currentSort}
         onChange={handleChange}
         displayEmpty
-        inputProps={{ 'aria-label': 'Sort by' }}
+        inputProps={{ "aria-label": "Sort by" }}
       >
         <MenuItem value="newest">Newest</MenuItem>
         <MenuItem value="oldest">Oldest</MenuItem>

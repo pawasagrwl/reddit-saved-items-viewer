@@ -1,4 +1,5 @@
-// src/components/CommentCard.tsx
+// src/components/comments/CommentCard.tsx
+
 import React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -21,11 +22,11 @@ const CommentCard: React.FC<CommentCardProps> = ({
     <Card sx={{ margin: 2 }}>
       <CardContent>
         <CardHeader subreddit={subreddit} datetime={datetime} />
-        <CardTitle title={postTitle}/>
+        <CardTitle title={postTitle} />
         <CardBody text={commentText} />
         <CardFooter votes={votes} url={postUrl} commentUrl={commentUrl} />
       </CardContent>
-      </Card>
+    </Card>
   );
 };
 

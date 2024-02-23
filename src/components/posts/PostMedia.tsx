@@ -1,4 +1,4 @@
-// src/components/PostMedia.tsx
+// src/components/posts/PostMedia.tsx
 import React, { useState } from "react";
 
 interface PostMediaProps {
@@ -22,7 +22,9 @@ const PostMedia: React.FC<PostMediaProps> = ({ media, title }) => {
         onLoad={() => setImageLoaded(true)}
         loading="lazy"
       />
-      {!imageLoaded && <div style={{ marginTop: "10px" }}>Loading image...</div>}
+      {!imageLoaded && (
+        <div style={{ marginTop: "10px" }}>Loading image...</div>
+      )}
     </>
   );
 };
