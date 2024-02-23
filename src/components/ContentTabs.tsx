@@ -6,7 +6,7 @@ import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import PostCard from "./PostCard";
 import CommentCard from "./CommentCard";
-import { Post, Comment } from "../types";
+import { Post, Comment } from "../types/savedItemsTypes";
 
 interface TabPanelProps {
   children?: React.ReactNode;
