@@ -27,6 +27,7 @@ export interface Counts {
 }
 
 export interface SavedItems {
+  yearFilter: any;
   last_pulled: string;
   counts: Counts;
   content: {
