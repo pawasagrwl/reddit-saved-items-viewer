@@ -1,14 +1,12 @@
 // src/components/CommentCard.tsx
-
 import React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import CardActions from "@mui/material/CardActions";
-import Button from "@mui/material/Button";
-import TruncatedText from "./TruncatedText";
-import Box from "@mui/material/Box";
 import { CommentCardProps } from "../types/componentTypes";
+import CardHeader from "./CardHeader";
+import CardBody from "./CardBody";
+import CardFooter from "./CardFooter";
+import CardTitle from "./CardTitle";
 
 const CommentCard: React.FC<CommentCardProps> = ({
   postTitle,
@@ -22,57 +20,12 @@ const CommentCard: React.FC<CommentCardProps> = ({
   return (
     <Card sx={{ margin: 2 }}>
       <CardContent>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          r/{subreddit}
-        </Typography>
-        <Typography
-          variant="h5"
-          component="div"
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          {postTitle}
-          <Typography
-            component="span"
-            variant="body2"
-            sx={{ marginLeft: "auto", fontSize: "0.8rem" }}
-          >
-            {new Date(datetime).toLocaleDateString()}{" "}
-            {new Date(datetime).toLocaleTimeString()}
-          </Typography>
-        </Typography>
-
-        <TruncatedText text={commentText} />
+        <CardHeader subreddit={subreddit} datetime={datetime} />
+        <CardTitle title={postTitle}/>
+        <CardBody text={commentText} />
+        <CardFooter votes={votes} url={postUrl} commentUrl={commentUrl} />
       </CardContent>
-      <CardActions sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Typography sx={{ marginLeft: "10px" }}>{votes} votes</Typography>
-        <Box>
-          <Button
-            variant="contained"
-            size="small"
-            href={postUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            sx={{ mr: 1 }}
-          >
-            Open Post
-          </Button>
-          <Button
-            variant="contained"
-            size="small"
-            href={commentUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            sx={{ mr: 1 }}
-          >
-            Open Comment
-          </Button>
-        </Box>
-      </CardActions>
-    </Card>
+      </Card>
   );
 };
 
