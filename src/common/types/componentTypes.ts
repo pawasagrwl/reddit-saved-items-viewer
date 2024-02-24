@@ -1,6 +1,6 @@
-// src/types/componentTypes.ts
+// src/common/types/componentTypes.ts
 
-import { Post } from "./savedItemsTypes";
+import { Post, Comment } from "./savedItemsTypes";
 
 export interface DropdownProps {
   label: string;
@@ -33,6 +33,8 @@ export interface ThemeTogglerProps {
 export interface SearchBarProps {
   searchTerm: string;
   handleSearchChange: (searchTerm: string) => void;
+  preserveSearch: boolean;
+  togglePreserveSearch: (preserveSearch: boolean) => void;
 }
 
 export interface SortSelectorProps {
@@ -46,6 +48,8 @@ export interface HeaderProps {
   currentSort: string;
   searchTerm: string;
   handleSearchChange: (searchTerm: string) => void;
+  preserveSearch: boolean;
+  togglePreserveSearch: (preserveSearch: boolean) => void
 }
 
 export interface PostCardProps {

@@ -59,8 +59,9 @@ const ContentTabs: React.FC<ContentTabsProps> = ({ posts, comments }) => {
           onChange={handleChange}
           aria-label="basic tabs example"
         >
-          <Tab label="Posts" />
-          <Tab label="Comments" />
+          {/* Update Tab labels to show counts */}
+          <Tab label={`Posts (${posts.length})`} />
+          <Tab label={`Comments (${comments.length})`} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>

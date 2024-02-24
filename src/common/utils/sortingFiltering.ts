@@ -1,4 +1,5 @@
-// src/utils/sortingFiltering.ts
+// src/common/utils/sortingFiltering.ts
+
 import { SavedItems, Post, Comment } from "../types/savedItemsTypes";
 
 export const sortData = (data: SavedItems, currentSort: string): SavedItems => {
@@ -100,7 +101,7 @@ export const getDropdownOptions = (
     case "subreddit":
       return Object.entries(data.counts.subreddits)
         .map(([key, value]) => ({
-          label: `${key} (${value.posts})`,
+          label: `${key}`,
           value: key,
         }))
         .sort((a, b) => a.label.localeCompare(b.label)); // Alphabetically sorts the subreddit options
@@ -130,7 +131,7 @@ export const getDropdownOptions = (
         "November",
         "December",
       ];
-      if (!data.yearFilter) return [];
+      // if (!data.yearFilter) return [];
       return [
         ...new Set(
           Object.keys(data.counts.dates)
@@ -146,7 +147,7 @@ export const getDropdownOptions = (
 
     case "votes":
       return Object.keys(data.counts.votes).map((range) => ({
-        label: `${range} (${data.counts.votes[range].posts})`,
+        label: `${range}`,
         value: range,
       }));
     default:

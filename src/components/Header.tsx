@@ -2,10 +2,10 @@ import React from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import SearchBar from './header/SearchBar'; // Import SearchBar
-import ThemeToggler from './header/ThemeToggler'; // Import ThemeToggler
+import SearchBar from "./header/SearchBar"; // Import SearchBar
+import ThemeToggler from "./header/ThemeToggler"; // Import ThemeToggler
 import { HeaderProps } from "../common/types/componentTypes";
-import SortSelector from './header/SortSelector';
+import SortSelector from "./header/SortSelector";
 
 const Header: React.FC<HeaderProps> = ({
   darkMode,
@@ -14,6 +14,8 @@ const Header: React.FC<HeaderProps> = ({
   currentSort,
   searchTerm,
   handleSearchChange,
+  preserveSearch,
+  togglePreserveSearch,
 }) => {
   return (
     <AppBar position="sticky">
@@ -21,8 +23,16 @@ const Header: React.FC<HeaderProps> = ({
         <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
           Reddit Saved Items Viewer
         </Typography>
-        <SearchBar searchTerm={searchTerm} handleSearchChange={handleSearchChange} />
-        <SortSelector currentSort={currentSort} handleSortChange={handleSortChange} />
+        <SearchBar
+          searchTerm={searchTerm}
+          handleSearchChange={handleSearchChange}
+          preserveSearch={preserveSearch}
+          togglePreserveSearch={togglePreserveSearch}
+        />
+        <SortSelector
+          currentSort={currentSort}
+          handleSortChange={handleSortChange}
+        />
         <ThemeToggler darkMode={darkMode} toggleTheme={handleThemeChange} />
       </Toolbar>
     </AppBar>

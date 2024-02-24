@@ -1,4 +1,4 @@
-// src/savedItemsTypes.ts
+// src/common/types/savedItemsTypes.ts
 
 export interface Post {
   title: string;

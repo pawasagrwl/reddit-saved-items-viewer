@@ -27,14 +27,15 @@ const App: React.FC = () => {
   const { savedItems } = useSavedItems(currentSort);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [preserveSearch, setPreserveSearch] = useState<boolean>(false);
-
+  const togglePreserveSearch = (checked: boolean) => {
+    setPreserveSearch(checked);
+  };
   const theme = createTheme({
     palette: {
       mode: darkMode ? "dark" : "light",
     },
   });
 
-  // Update the filteredPosts and filteredComments logic to include searchTerm and preserveSearch
   let filteredPosts = savedItems
     ? filterPosts(
         savedItems.content.posts,
@@ -75,6 +76,8 @@ const App: React.FC = () => {
         currentSort={currentSort}
         searchTerm={searchTerm}
         handleSearchChange={setSearchTerm}
+        preserveSearch={preserveSearch}
+        togglePreserveSearch={togglePreserveSearch}
       />
       <div
         style={{
