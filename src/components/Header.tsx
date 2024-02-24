@@ -4,7 +4,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import SearchBar from "./header/SearchBar"; // Import SearchBar
 import ThemeToggler from "./header/ThemeToggler"; // Import ThemeToggler
-import { HeaderProps } from "../common/types/componentTypes";
+import { HeaderProps } from "../common/types/headerTypes";
 import SortSelector from "./header/SortSelector";
 
 const Header: React.FC<HeaderProps> = ({

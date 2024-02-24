@@ -7,7 +7,7 @@ import {
   MenuItem,
   SelectChangeEvent,
 } from "@mui/material";
-import { DropdownProps } from "../../common/types/componentTypes"; // Adjust the import path as necessary
+import { DropdownProps } from "../../common/types/dropdownTypes"; // Adjust the import path as necessary
 
 const Dropdown: React.FC<DropdownProps> = ({
   label,

@@ -2,7 +2,7 @@ import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import { styled } from "@mui/material/styles";
-import { SearchBarProps } from "../../common/types/componentTypes";
+import { SearchBarProps } from "../../common/types/headerTypes";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 

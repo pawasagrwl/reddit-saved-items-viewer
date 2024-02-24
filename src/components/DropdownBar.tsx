@@ -1,22 +1,7 @@
 // src/components/DropdownBar.tsx
 import React from "react";
 import Dropdown from "./common/Dropdown";
-import { DropdownOption } from "../common/types/componentTypes"; // Adjust types as needed
-
-interface DropdownBarProps {
-  subredditFilter: string;
-  yearFilter: string;
-  monthFilter: string;
-  votesFilter: string;
-  setSubredditFilter: React.Dispatch<React.SetStateAction<string>>;
-  setYearFilter: React.Dispatch<React.SetStateAction<string>>;
-  setMonthFilter: React.Dispatch<React.SetStateAction<string>>;
-  setVotesFilter: React.Dispatch<React.SetStateAction<string>>;
-  subredditOptions: DropdownOption[];
-  yearOptions: DropdownOption[];
-  monthOptions: DropdownOption[];
-  votesOptions: DropdownOption[];
-}
+import { DropdownBarProps, DropdownOption } from "../common/types/dropdownTypes"; // Adjust types as needed
 
 const DropdownBar: React.FC<DropdownBarProps> = ({
   subredditFilter,

@@ -3,7 +3,7 @@
 import React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import { CommentCardProps } from "../../common/types/componentTypes";
+import { CommentCardProps } from "../../common/types/contentTypes";
 import CardHeader from "../common/CardHeader";
 import CardBody from "../common/CardBody";
 import CardFooter from "../common/CardFooter";
