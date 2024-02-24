@@ -5,7 +5,7 @@ import {
   Select,
   SelectChangeEvent,
 } from "@mui/material";
-import { SortSelectorProps } from "../../types/componentTypes";
+import { SortSelectorProps } from "../../common/types/componentTypes";
 
 const SortSelector: React.FC<SortSelectorProps> = ({
   currentSort,

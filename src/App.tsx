@@ -4,9 +4,9 @@ import ContentTabs from "./components/ContentTabs";
 import DropdownBar from "./components/DropdownBar";
 
 import CssBaseline from "@mui/material/CssBaseline";
-import { useSavedItems } from "./hooks/useSavedItems";
+import { useSavedItems } from "./common/hooks/useSavedItems";
 
-import { useTheme } from "./context/ThemeContext";
+import { useTheme } from "./common/context/ThemeContext";
 import {
   createTheme,
   ThemeProvider as MUIThemeProvider,
@@ -15,7 +15,7 @@ import {
   filterPosts,
   filterComments,
   getDropdownOptions,
-} from "./utils/sortingFiltering";
+} from "./common/utils/sortingFiltering";
 
 const App: React.FC = () => {
   const [currentSort, setCurrentSort] = useState<string>("");

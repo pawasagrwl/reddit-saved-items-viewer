@@ -2,7 +2,7 @@ import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import { styled } from "@mui/material/styles";
-import { SearchBarProps } from "../../types/componentTypes";
+import { SearchBarProps } from "../../common/types/componentTypes";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
