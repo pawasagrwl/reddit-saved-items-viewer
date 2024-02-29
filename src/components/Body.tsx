@@ -4,7 +4,7 @@ import DropdownBar from './body/DropdownBar';
 import ContentTabs from './body/ContentTabs';
 import { useSavedItems } from "../common/hooks/useSavedItems";
 import { filterPosts, filterComments, getDropdownOptions } from "../common/utils/sortingFiltering";
-import { BodyTypes } from '../common/types/bodyTypes'; // Ensure this path is correct
+import { BodyTypes } from '../common/types/bodyTypes';
 
 const Body: React.FC<BodyTypes> = ({
   subredditFilter,
@@ -27,7 +27,6 @@ const Body: React.FC<BodyTypes> = ({
     ? filterComments(savedItems.content.comments, subredditFilter, yearFilter, monthFilter, votesFilter)
     : [];
 
-  // Only call getDropdownOptions if savedItems is not null
   const subredditOptions = savedItems ? getDropdownOptions(savedItems, "subreddit") : [];
   const yearOptions = savedItems ? getDropdownOptions(savedItems, "year") : [];
   const monthOptions = savedItems ? getDropdownOptions(savedItems, "month") : [];
@@ -35,14 +34,12 @@ const Body: React.FC<BodyTypes> = ({
 
   return (
     <>
-      <div
-        style={{
-          padding: "20px",
+      <div style={{
+          padding: "0.5px",
           display: "flex",
           justifyContent: "center",
           gap: "20px",
-        }}
-      >
+        }}>
         <DropdownBar
           subredditFilter={subredditFilter}
           setSubredditFilter={setSubredditFilter}
@@ -58,7 +55,9 @@ const Body: React.FC<BodyTypes> = ({
           votesOptions={votesOptions}
         />
       </div>
-      <ContentTabs posts={filteredPosts} comments={filteredComments} />
+      <div style={{ maxHeight: 'calc(100vh - 200px)', overflowY: 'auto' }}>
+        <ContentTabs posts={filteredPosts} comments={filteredComments} />
+      </div>
     </>
   );
 };

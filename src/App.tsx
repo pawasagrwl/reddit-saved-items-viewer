@@ -1,22 +1,16 @@
 import React, { useState } from "react";
 import Header from "./components/Header";
-import ContentTabs from "./components/body/ContentTabs";
-import DropdownBar from "./components/body/DropdownBar";
 import { ThemeProvider } from "./common/context/ThemeContext";
 import CssBaseline from "@mui/material/CssBaseline";
-import { useSavedItems } from "./common/hooks/useSavedItems";
 import { useTheme } from "./common/context/ThemeContext";
+
+import Footer from "./components/Footer";
+import Body from "./components/Body";
 import {
   createTheme,
   ThemeProvider as MUIThemeProvider,
 } from "@mui/material/styles";
-import {
-  filterPosts,
-  filterComments,
-  getDropdownOptions,
-} from "./common/utils/sortingFiltering";
-import Footer from "./components/Footer";
-import Body from './components/Body';
+
 const App: React.FC = () => {
   const [currentSort, setCurrentSort] = useState<string>("");
   const [subredditFilter, setSubredditFilter] = useState("");
@@ -34,7 +28,6 @@ const App: React.FC = () => {
       mode: darkMode ? "dark" : "light",
     },
   });
-
 
   return (
     <ThemeProvider>
@@ -60,7 +53,8 @@ const App: React.FC = () => {
           votesFilter={votesFilter}
           setVotesFilter={setVotesFilter}
           currentSort={currentSort}
-        /><Footer />
+        />
+        <Footer />
       </MUIThemeProvider>
     </ThemeProvider>
   );
