@@ -3,9 +3,6 @@ import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import { styled } from "@mui/material/styles";
 import { SearchBarProps } from "../../common/types/headerTypes";
-import Checkbox from "@mui/material/Checkbox";
-import FormControlLabel from "@mui/material/FormControlLabel";
-
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -45,16 +42,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-// Add a new style for the checkbox
-const StyledFormControlLabel = styled(FormControlLabel)(({ theme }) => ({
-  // Add styles to position the checkbox inside the search bar
-  position: "absolute",
-  right: 0,
-  top: "50%",
-  transform: "translateY(-50%)",
-  marginRight: theme.spacing(1),
-}));
-
 const SearchBar: React.FC<SearchBarProps> = ({
   searchTerm,
   handleSearchChange,
@@ -71,16 +58,6 @@ const SearchBar: React.FC<SearchBarProps> = ({
         inputProps={{ "aria-label": "search" }}
         value={searchTerm}
         onChange={(e) => handleSearchChange(e.target.value)}
-      />
-      <StyledFormControlLabel
-        control={
-          <Checkbox
-            checked={preserveSearch}
-            onChange={(e) => togglePreserveSearch(e.target.checked)}
-            color="primary"
-          />
-        }
-        label="Preserve Search"
       />
     </Search>
   );

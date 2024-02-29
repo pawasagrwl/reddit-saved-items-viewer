@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Header from "./components/Header";
 import ContentTabs from "./components/ContentTabs";
 import DropdownBar from "./components/DropdownBar";
-
+import { ThemeProvider } from "./common/context/ThemeContext";
 import CssBaseline from "@mui/material/CssBaseline";
 import { useSavedItems } from "./common/hooks/useSavedItems";
 
@@ -16,6 +16,7 @@ import {
   filterComments,
   getDropdownOptions,
 } from "./common/utils/sortingFiltering";
+import Footer from "./components/Footer";
 
 const App: React.FC = () => {
   const [currentSort, setCurrentSort] = useState<string>("");
@@ -67,43 +68,48 @@ const App: React.FC = () => {
     : [];
 
   return (
-    <MUIThemeProvider theme={theme}>
-      <CssBaseline />
-      <Header
-        darkMode={darkMode}
-        handleThemeChange={toggleTheme}
-        handleSortChange={setCurrentSort}
-        currentSort={currentSort}
-        searchTerm={searchTerm}
-        handleSearchChange={setSearchTerm}
-        preserveSearch={preserveSearch}
-        togglePreserveSearch={togglePreserveSearch}
-      />
-      <div
-        style={{
-          padding: "20px",
-          display: "flex",
-          justifyContent: "center",
-          gap: "20px",
-        }}
-      >
-        <DropdownBar
-          subredditFilter={subredditFilter}
-          setSubredditFilter={setSubredditFilter}
-          yearFilter={yearFilter}
-          setYearFilter={setYearFilter}
-          monthFilter={monthFilter}
-          setMonthFilter={setMonthFilter}
-          votesFilter={votesFilter}
-          setVotesFilter={setVotesFilter}
-          subredditOptions={subredditOptions}
-          yearOptions={yearOptions}
-          monthOptions={monthOptions}
-          votesOptions={votesOptions}
+    <ThemeProvider>
+      {" "}
+      {/* Wrap the rest of your app in the ThemeProvider */}
+      <MUIThemeProvider theme={theme}>
+        <CssBaseline />
+        <Header
+          darkMode={darkMode}
+          handleThemeChange={toggleTheme}
+          handleSortChange={setCurrentSort}
+          currentSort={currentSort}
+          searchTerm={searchTerm}
+          handleSearchChange={setSearchTerm}
+          preserveSearch={preserveSearch}
+          togglePreserveSearch={togglePreserveSearch}
         />
-      </div>
-      <ContentTabs posts={filteredPosts} comments={filteredComments} />
-    </MUIThemeProvider>
+        <div
+          style={{
+            padding: "20px",
+            display: "flex",
+            justifyContent: "center",
+            gap: "20px",
+          }}
+        >
+          <DropdownBar
+            subredditFilter={subredditFilter}
+            setSubredditFilter={setSubredditFilter}
+            yearFilter={yearFilter}
+            setYearFilter={setYearFilter}
+            monthFilter={monthFilter}
+            setMonthFilter={setMonthFilter}
+            votesFilter={votesFilter}
+            setVotesFilter={setVotesFilter}
+            subredditOptions={subredditOptions}
+            yearOptions={yearOptions}
+            monthOptions={monthOptions}
+            votesOptions={votesOptions}
+          />
+        </div>
+        <ContentTabs posts={filteredPosts} comments={filteredComments} />
+        <Footer />
+      </MUIThemeProvider>
+    </ThemeProvider>
   );
 };
 

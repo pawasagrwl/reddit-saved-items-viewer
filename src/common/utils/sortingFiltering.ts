@@ -35,6 +35,8 @@ export const sortData = (data: SavedItems, currentSort: string): SavedItems => {
       sortedPosts.sort((a, b) => b.votes - a.votes);
       sortedComments.sort((a, b) => b.votes - a.votes);
       break;
+    case "saved":
+      break;
     default:
       // No default sorting applied
       break;

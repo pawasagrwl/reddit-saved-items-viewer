@@ -1,6 +1,7 @@
 import React from "react";
 import {
   FormControl,
+  InputLabel,
   MenuItem,
   Select,
   SelectChangeEvent,
@@ -17,12 +18,19 @@ const SortSelector: React.FC<SortSelectorProps> = ({
 
   return (
     <FormControl variant="outlined" size="small" sx={{ m: 1, minWidth: 120 }}>
+      <InputLabel id="sort-by-label">Sort by</InputLabel>
       <Select
+        labelId="sort-by-label"
+        id="sort-by-select" // Add an id to associate the label with the select
         value={currentSort}
         onChange={handleChange}
-        displayEmpty
-        inputProps={{ "aria-label": "Sort by" }}
+        label="Sort by" // This label prop is used for the floating label effect
+        
+        inputProps={{
+          "aria-label": "Sort by",
+        }}
       >
+        <MenuItem value="saved">Saved</MenuItem>
         <MenuItem value="newest">Newest</MenuItem>
         <MenuItem value="oldest">Oldest</MenuItem>
         <MenuItem value="highest_votes">Highest Votes</MenuItem>
