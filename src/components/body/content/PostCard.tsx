@@ -2,12 +2,12 @@
 import React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import { PostCardProps } from "../../common/types/contentTypes";
-import CardHeader from "../common/CardHeader";
-import CardTitle from "../common/CardTitle";
-import CardBody from "../common/CardBody";
+import { PostCardProps } from "../../../common/types/contentTypes";
+import CardHeader from "./card/CardHeader";
+import CardTitle from "./card/CardTitle";
+import CardBody from "./card/CardBody";
 import PostMedia from "./PostMedia";
-import CardFooter from "../common/CardFooter";
+import CardFooter from "./card/CardFooter";
 
 const PostCard: React.FC<PostCardProps> = ({
   title,

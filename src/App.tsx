@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import Header from "./components/Header";
-import ContentTabs from "./components/ContentTabs";
-import DropdownBar from "./components/DropdownBar";
+import ContentTabs from "./components/body/ContentTabs";
+import DropdownBar from "./components/body/DropdownBar";
 import { ThemeProvider } from "./common/context/ThemeContext";
 import CssBaseline from "@mui/material/CssBaseline";
 import { useSavedItems } from "./common/hooks/useSavedItems";
-
 import { useTheme } from "./common/context/ThemeContext";
 import {
   createTheme,
@@ -17,7 +16,7 @@ import {
   getDropdownOptions,
 } from "./common/utils/sortingFiltering";
 import Footer from "./components/Footer";
-
+import Body from './components/Body';
 const App: React.FC = () => {
   const [currentSort, setCurrentSort] = useState<string>("");
   const [subredditFilter, setSubredditFilter] = useState("");
@@ -25,7 +24,6 @@ const App: React.FC = () => {
   const [monthFilter, setMonthFilter] = useState("");
   const [votesFilter, setVotesFilter] = useState("");
   const { darkMode, toggleTheme } = useTheme();
-  const { savedItems } = useSavedItems(currentSort);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [preserveSearch, setPreserveSearch] = useState<boolean>(false);
   const togglePreserveSearch = (checked: boolean) => {
@@ -37,40 +35,9 @@ const App: React.FC = () => {
     },
   });
 
-  let filteredPosts = savedItems
-    ? filterPosts(
-        savedItems.content.posts,
-        subredditFilter,
-        yearFilter,
-        monthFilter,
-        votesFilter
-      )
-    : [];
-  let filteredComments = savedItems
-    ? filterComments(
-        savedItems.content.comments,
-        subredditFilter,
-        yearFilter,
-        monthFilter,
-        votesFilter
-      )
-    : [];
-
-  const subredditOptions = savedItems
-    ? getDropdownOptions(savedItems, "subreddit")
-    : [];
-  const yearOptions = savedItems ? getDropdownOptions(savedItems, "year") : [];
-  const monthOptions = savedItems
-    ? getDropdownOptions(savedItems, "month")
-    : [];
-  const votesOptions = savedItems
-    ? getDropdownOptions(savedItems, "votes")
-    : [];
 
   return (
     <ThemeProvider>
-      {" "}
-      {/* Wrap the rest of your app in the ThemeProvider */}
       <MUIThemeProvider theme={theme}>
         <CssBaseline />
         <Header
@@ -83,31 +50,17 @@ const App: React.FC = () => {
           preserveSearch={preserveSearch}
           togglePreserveSearch={togglePreserveSearch}
         />
-        <div
-          style={{
-            padding: "20px",
-            display: "flex",
-            justifyContent: "center",
-            gap: "20px",
-          }}
-        >
-          <DropdownBar
-            subredditFilter={subredditFilter}
-            setSubredditFilter={setSubredditFilter}
-            yearFilter={yearFilter}
-            setYearFilter={setYearFilter}
-            monthFilter={monthFilter}
-            setMonthFilter={setMonthFilter}
-            votesFilter={votesFilter}
-            setVotesFilter={setVotesFilter}
-            subredditOptions={subredditOptions}
-            yearOptions={yearOptions}
-            monthOptions={monthOptions}
-            votesOptions={votesOptions}
-          />
-        </div>
-        <ContentTabs posts={filteredPosts} comments={filteredComments} />
-        <Footer />
+        <Body
+          subredditFilter={subredditFilter}
+          setSubredditFilter={setSubredditFilter}
+          yearFilter={yearFilter}
+          setYearFilter={setYearFilter}
+          monthFilter={monthFilter}
+          setMonthFilter={setMonthFilter}
+          votesFilter={votesFilter}
+          setVotesFilter={setVotesFilter}
+          currentSort={currentSort}
+        /><Footer />
       </MUIThemeProvider>
     </ThemeProvider>
   );

@@ -4,9 +4,9 @@ import React from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
-import PostCard from "./posts/PostCard";
-import CommentCard from "./comments/CommentCard";
-import { Post, Comment } from "../common/types/savedItemsTypes";
+import PostCard from "./content/PostCard";
+import CommentCard from "./content/CommentCard";
+import { Post, Comment } from "../../common/types/savedItemsTypes";
 
 interface TabPanelProps {
   children?: React.ReactNode;

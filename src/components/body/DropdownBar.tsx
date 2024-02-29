@@ -1,7 +1,7 @@
 // src/components/DropdownBar.tsx
 import React from "react";
-import Dropdown from "./common/Dropdown";
-import { DropdownBarProps, DropdownOption } from "../common/types/dropdownTypes"; // Adjust types as needed
+import Dropdown from "./Dropdown";
+import { DropdownBarProps, DropdownOption } from "../../common/types/dropdownTypes"; // Adjust types as needed
 
 const DropdownBar: React.FC<DropdownBarProps> = ({
   subredditFilter,
