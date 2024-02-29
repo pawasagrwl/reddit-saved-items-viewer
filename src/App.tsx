@@ -19,10 +19,7 @@ const App: React.FC = () => {
   const [votesFilter, setVotesFilter] = useState("");
   const { darkMode, toggleTheme } = useTheme();
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [preserveSearch, setPreserveSearch] = useState<boolean>(false);
-  const togglePreserveSearch = (checked: boolean) => {
-    setPreserveSearch(checked);
-  };
+  
   const theme = createTheme({
     palette: {
       mode: darkMode ? "dark" : "light",
@@ -40,8 +37,6 @@ const App: React.FC = () => {
           currentSort={currentSort}
           searchTerm={searchTerm}
           handleSearchChange={setSearchTerm}
-          preserveSearch={preserveSearch}
-          togglePreserveSearch={togglePreserveSearch}
         />
         <Body
           subredditFilter={subredditFilter}

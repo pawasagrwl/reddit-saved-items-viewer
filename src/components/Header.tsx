@@ -14,8 +14,6 @@ const Header: React.FC<HeaderProps> = ({
   currentSort,
   searchTerm,
   handleSearchChange,
-  preserveSearch,
-  togglePreserveSearch,
 }) => {
   return (
     <AppBar position="sticky">
@@ -26,8 +24,6 @@ const Header: React.FC<HeaderProps> = ({
         <SearchBar
           searchTerm={searchTerm}
           handleSearchChange={handleSearchChange}
-          preserveSearch={preserveSearch}
-          togglePreserveSearch={togglePreserveSearch}
         />
         <SortSelector
           currentSort={currentSort}

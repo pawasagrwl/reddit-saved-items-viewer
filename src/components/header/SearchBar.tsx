@@ -45,8 +45,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const SearchBar: React.FC<SearchBarProps> = ({
   searchTerm,
   handleSearchChange,
-  preserveSearch,
-  togglePreserveSearch,
 }) => {
   return (
     <Search>
