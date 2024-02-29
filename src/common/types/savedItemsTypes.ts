@@ -8,6 +8,7 @@ export interface Post {
   media: string;
   datetime: string;
   votes: number;
+  nsfw: boolean
 }
 
 export interface Comment {
@@ -18,6 +19,7 @@ export interface Comment {
   comment_text: string;
   datetime: string;
   votes: number;
+  nsfw: boolean
 }
 
 export interface Counts {

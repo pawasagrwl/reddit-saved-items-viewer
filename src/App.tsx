@@ -15,7 +15,7 @@ const App: React.FC = () => {
   const [currentSort, setCurrentSort] = useState<string>("");
   const [subredditFilter, setSubredditFilter] = useState("");
   const [yearFilter, setYearFilter] = useState("");
-  const [monthFilter, setMonthFilter] = useState("");
+  const [nsfwFilter, setNsfwFilter] = useState("");
   const [votesFilter, setVotesFilter] = useState("");
   const { darkMode, toggleTheme } = useTheme();
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -43,8 +43,8 @@ const App: React.FC = () => {
           setSubredditFilter={setSubredditFilter}
           yearFilter={yearFilter}
           setYearFilter={setYearFilter}
-          monthFilter={monthFilter}
-          setMonthFilter={setMonthFilter}
+          nsfwFilter={nsfwFilter}
+          setNsfwFilter={setNsfwFilter}
           votesFilter={votesFilter}
           setVotesFilter={setVotesFilter}
           currentSort={currentSort}

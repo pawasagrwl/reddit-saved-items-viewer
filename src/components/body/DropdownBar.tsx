@@ -13,12 +13,15 @@ const DropdownBar: React.FC<DropdownBarProps> = ({
   subredditFilter,
   yearFilter,
   votesFilter,
+  nsfwFilter,
   setSubredditFilter,
   setYearFilter,
   setVotesFilter,
+  setNsfwFilter,
   subredditOptions,
   yearOptions,
   votesOptions,
+  nsfwOptions
 }) => {
   const { darkMode } = useTheme(); // use the darkMode value from ThemeContext
   const [filtersVisible, setFiltersVisible] = useState(true); // State to toggle visibility
@@ -27,6 +30,7 @@ const DropdownBar: React.FC<DropdownBarProps> = ({
     setSubredditFilter("");
     setYearFilter("");
     setVotesFilter("");
+    setNsfwFilter("");
   };
   const toggleFiltersVisibility = () => {
     setFiltersVisible(!filtersVisible);
@@ -80,6 +84,12 @@ const DropdownBar: React.FC<DropdownBarProps> = ({
             value={votesFilter}
             onChange={setVotesFilter}
             options={votesOptions}
+          />
+          <Dropdown
+            label="NSFW"
+            value={nsfwFilter}
+            onChange={setNsfwFilter}
+            options={nsfwOptions}
           />
           <Tooltip title="Reset Filters">
             <IconButton

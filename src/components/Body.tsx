@@ -11,8 +11,8 @@ const Body: React.FC<BodyTypes> = ({
   setSubredditFilter,
   yearFilter,
   setYearFilter,
-  monthFilter,
-  setMonthFilter,
+  nsfwFilter,
+  setNsfwFilter,
   votesFilter,
   setVotesFilter,
   currentSort
@@ -20,16 +20,16 @@ const Body: React.FC<BodyTypes> = ({
   const { savedItems } = useSavedItems(currentSort);
 
   const filteredPosts = savedItems
-    ? filterPosts(savedItems.content.posts, subredditFilter, yearFilter, monthFilter, votesFilter)
+    ? filterPosts(savedItems.content.posts, subredditFilter, yearFilter, votesFilter, nsfwFilter)
     : [];
   
   const filteredComments = savedItems
-    ? filterComments(savedItems.content.comments, subredditFilter, yearFilter, monthFilter, votesFilter)
+    ? filterComments(savedItems.content.comments, subredditFilter, yearFilter, votesFilter, nsfwFilter,)
     : [];
 
   const subredditOptions = savedItems ? getDropdownOptions(savedItems, "subreddit") : [];
   const yearOptions = savedItems ? getDropdownOptions(savedItems, "year") : [];
-  const monthOptions = savedItems ? getDropdownOptions(savedItems, "month") : [];
+  const nsfwOptions = savedItems ? getDropdownOptions(savedItems, "nsfw") : [];
   const votesOptions = savedItems ? getDropdownOptions(savedItems, "votes") : [];
 
   return (
@@ -45,13 +45,13 @@ const Body: React.FC<BodyTypes> = ({
           setSubredditFilter={setSubredditFilter}
           yearFilter={yearFilter}
           setYearFilter={setYearFilter}
-          monthFilter={monthFilter}
-          setMonthFilter={setMonthFilter}
+          nsfwFilter={nsfwFilter}
+          setNsfwFilter={setNsfwFilter}
           votesFilter={votesFilter}
           setVotesFilter={setVotesFilter}
           subredditOptions={subredditOptions}
           yearOptions={yearOptions}
-          monthOptions={monthOptions}
+          nsfwOptions={nsfwOptions}
           votesOptions={votesOptions}
         />
       </div>

@@ -49,22 +49,28 @@ export const filterPosts = (
   posts: Post[],
   subredditFilter: string,
   yearFilter: string,
-  monthFilter: string,
-  votesFilter: string
+  votesFilter: string,
+  nsfwFilter: string
 ): Post[] => {
   return posts.filter((post) => {
     const postDate = new Date(post.datetime);
     const postYear = postDate.getFullYear().toString();
-    const postMonth = (postDate.getMonth() + 1).toString().padStart(2, "0");
     const votesRange = votesFilter.split("-");
+
+    const nsfwCondition =
+      nsfwFilter === "no_nsfw"
+        ? !post.nsfw
+        : nsfwFilter === "only_nsfw"
+        ? post.nsfw
+        : true;
 
     return (
       (!subredditFilter || post.subreddit === subredditFilter) &&
       (!yearFilter || postYear === yearFilter) &&
-      (!monthFilter || postMonth === monthFilter) &&
       (!votesFilter ||
         (post.votes >= parseInt(votesRange[0]) &&
-          post.votes <= parseInt(votesRange[1])))
+          post.votes <= parseInt(votesRange[1]))) &&
+      nsfwCondition // Apply NSFW filter condition
     );
   });
 };
@@ -73,24 +79,28 @@ export const filterComments = (
   comments: Comment[],
   subredditFilter: string,
   yearFilter: string,
-  monthFilter: string,
-  votesFilter: string
+  votesFilter: string,
+  nsfwFilter: string // Add nsfwFilter parameter
 ): Comment[] => {
   return comments.filter((comment) => {
     const commentDate = new Date(comment.datetime);
     const commentYear = commentDate.getFullYear().toString();
-    const commentMonth = (commentDate.getMonth() + 1)
-      .toString()
-      .padStart(2, "0");
     const votesRange = votesFilter.split("-");
+
+    const nsfwCondition =
+      nsfwFilter === "no_nsfw"
+        ? !comment.nsfw
+        : nsfwFilter === "only_nsfw"
+        ? comment.nsfw
+        : true;
 
     return (
       (!subredditFilter || comment.post_subreddit === subredditFilter) &&
       (!yearFilter || commentYear === yearFilter) &&
-      (!monthFilter || commentMonth === monthFilter) &&
       (!votesFilter ||
         (comment.votes >= parseInt(votesRange[0]) &&
-          comment.votes <= parseInt(votesRange[1])))
+          comment.votes <= parseInt(votesRange[1]))) &&
+      nsfwCondition // Apply NSFW filter condition
     );
   });
 };
@@ -123,6 +133,12 @@ export const getDropdownOptions = (
         label: `${range}`,
         value: range,
       }));
+    case "nsfw":
+      return [
+        { label: "All", value: "all" },
+        { label: "No NSFW", value: "no_nsfw" },
+        { label: "Only NSFW", value: "only_nsfw" },
+      ];
     default:
       return [];
   }

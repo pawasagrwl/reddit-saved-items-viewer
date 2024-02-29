@@ -15,14 +15,14 @@ export interface DropdownOption {
 export interface DropdownBarProps {
   subredditFilter: string;
   yearFilter: string;
-  monthFilter: string;
+  nsfwFilter: string;
   votesFilter: string;
   setSubredditFilter: React.Dispatch<React.SetStateAction<string>>;
   setYearFilter: React.Dispatch<React.SetStateAction<string>>;
-  setMonthFilter: React.Dispatch<React.SetStateAction<string>>;
+  setNsfwFilter: React.Dispatch<React.SetStateAction<string>>;
   setVotesFilter: React.Dispatch<React.SetStateAction<string>>;
   subredditOptions: DropdownOption[];
   yearOptions: DropdownOption[];
-  monthOptions: DropdownOption[];
+  nsfwOptions: DropdownOption[];
   votesOptions: DropdownOption[];
 }
