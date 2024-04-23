@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/rsaved/static/css/main.e6c13ad2.css",
+    "main.js": "/rsaved/static/js/main.027d35a6.js",
+    "static/js/453.175863e7.chunk.js": "/rsaved/static/js/453.175863e7.chunk.js",
+    "index.html": "/rsaved/index.html",
+    "main.e6c13ad2.css.map": "/rsaved/static/css/main.e6c13ad2.css.map",
+    "main.027d35a6.js.map": "/rsaved/static/js/main.027d35a6.js.map",
+    "453.175863e7.chunk.js.map": "/rsaved/static/js/453.175863e7.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.027d35a6.js"
+  ]
+}
