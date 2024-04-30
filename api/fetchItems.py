@@ -1,13 +1,9 @@
 from datetime import datetime
 from dotenv import load_dotenv
-import os, praw, json, time
+import os, praw, json, time, inquirer
 
 # Load environment variables from .env file
 load_dotenv()
-
-BOLD = '\033[1m'
-YELLOW = '\033[93m'
-RESET = '\033[0m'
 
 def get_readable_datetime(utc_timestamp):
     return datetime.utcfromtimestamp(utc_timestamp).strftime('%Y-%m-%d %H:%M:%S')
@@ -40,7 +36,27 @@ def update_counts(counts, item, is_post, vote_ranges):
     date_counts = counts["dates"].setdefault(year_month, {"posts": 0, "comments": 0})
     date_counts[type_] += 1
 
+def prompt_user_to_fetch():
+    question = [
+        inquirer.Confirm('refetch', message="Do you want to fetch the data again?", default=False)
+    ]
+    answer = inquirer.prompt(question)
+    return answer['refetch']
+
 def fetch_saved_items():
+    json_file_path = "src/data/saved_items.json"
+    if os.path.exists(json_file_path):
+        with open(json_file_path, 'r') as file:
+            data = json.load(file)
+            print(f"Last Fetched: {data['last_fetched']}")
+            print(f"Number of Posts: {len(data['content']['posts'])}")
+            print(f"Number of Comments: {len(data['content']['comments'])}")
+            print(" ")
+        if not prompt_user_to_fetch():
+            return
+    else:
+        print ("No saved_items.json found, fetching now.")
+        print (" ")
     
     reddit = praw.Reddit(
         client_id=os.getenv("REDDIT_CLIENT_ID"),
@@ -94,7 +110,7 @@ def fetch_saved_items():
                 saved_items["comments"].append(comment_data)
 
         final_output = {
-            "last_pulled": datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S'),
+            "last_fetched": datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S'),
             "counts": counts,
             "content": saved_items
         }
@@ -107,8 +123,9 @@ def fetch_saved_items():
         print(f"An error occurred: {e}")
         final_output = {}
     
-    
-    with open("saved_items.json", "w") as outfile:
+    os.makedirs(os.path.dirname(json_file_path), exist_ok=True)
+        
+    with open(json_file_path, "w") as outfile:
         json.dump(final_output, outfile, indent=4)
     
     print("\nFinished processing items.")

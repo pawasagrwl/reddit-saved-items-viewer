@@ -15,7 +15,7 @@ This Python script fetches your saved posts and comments from Reddit. It uses PR
 Install the required Python packages using pip:
 
 ```bash
-pip install praw python-dotenv
+pip install praw python-dotenv inquirer
 ```
 
 ### Reddit API Credentials

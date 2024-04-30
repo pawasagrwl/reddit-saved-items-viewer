@@ -29,9 +29,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start-api": "python api/fetchItems.py",
+    "fetch": "python api/fetchItems.py",
     "start-react": "react-scripts start",
-    "start": "npm-run-all -s start-api start-react",
+    "start": "npm-run-all -s fetch start-react",
     "build": "react-scripts build",
     "deploy": "gh-pages -d build",
     "test": "react-scripts test",
