@@ -3,7 +3,7 @@ import React from 'react';
 import { useTheme } from "../common/context/ThemeContext"; // Assuming this path is correct
 
 const Footer = () => {
-  const { darkMode } = useTheme(); // use the darkMode value from ThemeContext
+  const { darkMode } = useTheme();
 
   const footerStyle: React.CSSProperties = {
     backgroundColor: darkMode ? "#1A202C" : "#F7FAFC",
@@ -12,7 +12,7 @@ const Footer = () => {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    position: "fixed" as const, // TypeScript recognizes this as a valid Position type
+    position: "fixed" as const,
     bottom: 0,
     width: "100%",
     boxShadow: "0 -2px 10px 0 rgba(0, 0, 0, 0.2)",

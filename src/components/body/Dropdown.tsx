@@ -1,7 +1,7 @@
 // src/components/common/Dropdown.tsx
 import React from 'react';
 import { FormControl, TextField, FormHelperText } from '@mui/material';
-import { DropdownProps } from '../../common/types/dropdownTypes'; // Adjust the import path as necessary
+import { DropdownProps } from '../../common/types/dropdownTypes';
 import Autocomplete from '@mui/material/Autocomplete';
 
 const Dropdown: React.FC<DropdownProps> = ({
@@ -17,10 +17,10 @@ const Dropdown: React.FC<DropdownProps> = ({
   return (
     <FormControl variant="outlined" size="small" style={{ minWidth: 120, margin: '8px' }}>
       <Autocomplete
-        value={options.find(option => option.value === value) || null} // Find the option object that matches the current value or null if not found
+        value={options.find(option => option.value === value) || null}
         onChange={handleAutocompleteChange}
         options={options}
-        getOptionLabel={(option) => option.label} // Assuming your options are objects with `label` and `value` properties
+        getOptionLabel={(option) => option.label}
         renderInput={(params) => <TextField {...params} label={label} variant="outlined" />}
         size="small"
       />

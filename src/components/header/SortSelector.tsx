@@ -21,10 +21,10 @@ const SortSelector: React.FC<SortSelectorProps> = ({
       <InputLabel id="sort-by-label">Sort by</InputLabel>
       <Select
         labelId="sort-by-label"
-        id="sort-by-select" // Add an id to associate the label with the select
+        id="sort-by-select"
         value={currentSort}
         onChange={handleChange}
-        label="Sort by" // This label prop is used for the floating label effect
+        label="Sort by"
         
         inputProps={{
           "aria-label": "Sort by",

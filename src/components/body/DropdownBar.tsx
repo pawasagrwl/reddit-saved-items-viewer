@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import Tooltip from "@mui/material/Tooltip";
 import RefreshIcon from "@mui/icons-material/Refresh";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore"; // Icon for expanding
-import ExpandLessIcon from "@mui/icons-material/ExpandLess"; // Icon for collapsing
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import Dropdown from "./Dropdown";
 import { DropdownBarProps } from "../../common/types/dropdownTypes";
 import { useTheme } from "../../common/context/ThemeContext";
-import Button from "@mui/material/Button"; // Import Button for the clickable area
+import Button from "@mui/material/Button";
 import { IconButton } from "@mui/material";
 
 const DropdownBar: React.FC<DropdownBarProps> = ({
@@ -21,11 +21,11 @@ const DropdownBar: React.FC<DropdownBarProps> = ({
   subredditOptions,
   yearOptions,
   votesOptions,
-  nsfwOptions
+  nsfwOptions,
 }) => {
-  const { darkMode } = useTheme(); // use the darkMode value from ThemeContext
-  const [filtersVisible, setFiltersVisible] = useState(true); // State to toggle visibility
-  
+  const { darkMode } = useTheme();
+  const [filtersVisible, setFiltersVisible] = useState(true);
+
   const resetFilters = () => {
     setSubredditFilter("");
     setYearFilter("");
@@ -55,11 +55,10 @@ const DropdownBar: React.FC<DropdownBarProps> = ({
         }}
       >
         <Tooltip title="Toggle Filters">
-          {/* Replace IconButton with Button and include both text and icon */}
           <Button
             onClick={toggleFiltersVisibility}
             endIcon={filtersVisible ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-            style={{ textTransform: "none" }} // Prevents uppercase transformation by default
+            style={{ textTransform: "none" }} 
           >
             Filter Items
           </Button>

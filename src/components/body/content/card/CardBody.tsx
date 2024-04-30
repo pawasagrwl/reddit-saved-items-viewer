@@ -1,7 +1,7 @@
 // src/components/common/CardBody.tsx
 
 import React from "react";
-import TruncatedText from "./TruncatedText"; // Assuming TruncatedText is already defined
+import TruncatedText from "./TruncatedText";
 
 interface CardBodyProps {
   text: string;

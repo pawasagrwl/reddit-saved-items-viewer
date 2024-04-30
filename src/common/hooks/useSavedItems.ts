@@ -8,7 +8,6 @@ export const useSavedItems = (currentSort: string) => {
   const [savedItems, setSavedItems] = useState<SavedItems | null>(null);
 
   useEffect(() => {
-    // No fetch needed, use imported data
     setSavedItems(sortData(savedItemsData, currentSort));
   }, [currentSort]);
 

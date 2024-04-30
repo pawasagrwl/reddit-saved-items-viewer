@@ -70,7 +70,7 @@ export const filterPosts = (
       (!votesFilter ||
         (post.votes >= parseInt(votesRange[0]) &&
           post.votes <= parseInt(votesRange[1]))) &&
-      nsfwCondition // Apply NSFW filter condition
+      nsfwCondition
     );
   });
 };
@@ -80,7 +80,7 @@ export const filterComments = (
   subredditFilter: string,
   yearFilter: string,
   votesFilter: string,
-  nsfwFilter: string // Add nsfwFilter parameter
+  nsfwFilter: string
 ): Comment[] => {
   return comments.filter((comment) => {
     const commentDate = new Date(comment.datetime);
@@ -100,7 +100,7 @@ export const filterComments = (
       (!votesFilter ||
         (comment.votes >= parseInt(votesRange[0]) &&
           comment.votes <= parseInt(votesRange[1]))) &&
-      nsfwCondition // Apply NSFW filter condition
+      nsfwCondition
     );
   });
 };
@@ -117,6 +117,7 @@ export const getDropdownOptions = (
           value: key,
         }))
         .sort((a, b) => a.label.localeCompare(b.label)); // Alphabetically sorts the subreddit options
+        
     case "year":
       return [
         ...new Set(

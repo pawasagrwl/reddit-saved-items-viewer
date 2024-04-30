@@ -1,6 +1,3 @@
-// src/common/types/types.ts
-import { DropdownOption } from './dropdownTypes';
-
 export interface BodyTypes {
   subredditFilter: string;
   setSubredditFilter: React.Dispatch<React.SetStateAction<string>>;

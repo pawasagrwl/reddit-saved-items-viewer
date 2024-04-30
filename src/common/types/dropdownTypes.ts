@@ -3,7 +3,7 @@
 export interface DropdownProps {
   label: string;
   value: string;
-  onChange: (value: string) => void; // Adjusted to expect a string directly
+  onChange: (value: string) => void;
   options: { label: string; value: string }[];
 }
 

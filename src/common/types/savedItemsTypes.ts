@@ -29,7 +29,6 @@ export interface Counts {
 }
 
 export interface SavedItems {
-  // yearFilter: any;
   last_fetched_on: string;
   last_fetch_duration: number;
   counts: Counts;
