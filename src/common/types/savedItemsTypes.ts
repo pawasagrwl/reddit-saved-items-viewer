@@ -30,7 +30,7 @@ export interface Counts {
 
 export interface SavedItems {
   // yearFilter: any;
-  last_pulled: string;
+  last_fetched: string;
   counts: Counts;
   content: {
     posts: Post[];
