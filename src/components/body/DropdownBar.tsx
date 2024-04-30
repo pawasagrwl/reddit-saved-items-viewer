@@ -25,7 +25,7 @@ const DropdownBar: React.FC<DropdownBarProps> = ({
 }) => {
   const { darkMode } = useTheme();
   const [filtersVisible, setFiltersVisible] = useState(true);
-
+  
   const resetFilters = () => {
     setSubredditFilter("");
     setYearFilter("");
@@ -58,7 +58,7 @@ const DropdownBar: React.FC<DropdownBarProps> = ({
           <Button
             onClick={toggleFiltersVisibility}
             endIcon={filtersVisible ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-            style={{ textTransform: "none" }} 
+            style={{ textTransform: "none" }}
           >
             Filter Items
           </Button>
