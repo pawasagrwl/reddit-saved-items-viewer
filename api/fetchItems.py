@@ -1,12 +1,37 @@
-from datetime import datetime
+from datetime import datetime, timedelta
+import pytz  # Ensure this is installed or add it to your project requirements
 from dotenv import load_dotenv
 import os, praw, json, time, inquirer
 
 # Load environment variables from .env file
 load_dotenv()
 
+# Define the UTC and IST time zones
+utc_zone = pytz.utc
+ist_zone = pytz.timezone('Asia/Kolkata')
+
+def format_time(seconds):
+    # Create a timedelta object using the total seconds
+    td = timedelta(seconds=seconds)
+    # Extract hours, minutes, and seconds
+    hours, remainder = divmod(td.seconds, 3600)
+    minutes, seconds = divmod(remainder, 60)
+
+    # Adjust seconds to include any fractions from the original seconds as whole seconds
+    seconds = round(seconds + td.microseconds / 1_000_000)
+
+    # Form the string manually to include hours, minutes, and seconds with proper labels
+    return f"{hours} hours, {minutes} minutes, {seconds} seconds"
+
+
 def get_readable_datetime(utc_timestamp):
-    return datetime.utcfromtimestamp(utc_timestamp).strftime('%Y-%m-%d %H:%M:%S')
+    
+    # Convert the timestamp to UTC, then to IST
+    utc_time = datetime.utcfromtimestamp(utc_timestamp).replace(tzinfo=utc_zone)
+    ist_time = utc_time.astimezone(ist_zone)
+    
+    # Return the datetime in IST with the 'IST' suffix
+    return ist_time.strftime('%Y-%m-%d %H:%M:%S IST')
 
 def initialize_counts(vote_ranges):
     """Initialize the structure for counting posts and comments separately."""
@@ -32,7 +57,7 @@ def update_counts(counts, item, is_post, vote_ranges):
             counts["votes"][range_key][type_] += 1
             break
 
-    year_month = datetime.utcfromtimestamp(item.created_utc).strftime('%Y-%m')
+    year_month = get_readable_datetime(item.created_utc).split()[0][:7]
     date_counts = counts["dates"].setdefault(year_month, {"posts": 0, "comments": 0})
     date_counts[type_] += 1
 
@@ -48,9 +73,13 @@ def fetch_saved_items():
     if os.path.exists(json_file_path):
         with open(json_file_path, 'r') as file:
             data = json.load(file)
-            print(f"Last Fetched: {data['last_fetched']}")
-            print(f"Number of Posts: {len(data['content']['posts'])}")
-            print(f"Number of Comments: {len(data['content']['comments'])}")
+            posts = len(data['content']['posts'])
+            comments = len(data['content']['comments'])
+            items = posts + comments
+            last_fetch_duration = format_time(data['last_fetch_duration'])
+            print(f"Last Fetched on: {data['last_fetched_on']}")
+            print(f"Number of Items: {posts + comments} ({posts} Posts, {comments} Comments)")
+            print (f"Last Fetch Duration: {last_fetch_duration}")
             print(" ")
         if not prompt_user_to_fetch():
             return
@@ -108,14 +137,14 @@ def fetch_saved_items():
                 }
                 
                 saved_items["comments"].append(comment_data)
-
+        elapsed_time = time.time() - start_time
+        
         final_output = {
-            "last_fetched": datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S'),
+            "last_fetched_on": datetime.now(ist_zone).strftime('%Y-%m-%d %H:%M:%S IST'),
+            "last_fetch_duration": elapsed_time,
             "counts": counts,
             "content": saved_items
         }
-        
-        elapsed_time = time.time() - start_time
         
         print(f"Completed fetching items in {elapsed_time:.2f} seconds.")
         

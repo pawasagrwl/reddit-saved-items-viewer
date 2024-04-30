@@ -1,7 +1,6 @@
-
 # Reddit Saved Items Fetcher
 
-This Python script fetches your saved posts and comments from Reddit. It uses PRAW (Python Reddit API Wrapper) to securely access Reddit's API.
+This Python script fetches your saved posts and comments from Reddit and organizes them based on subreddits, vote ranges, and dates. It uses PRAW (Python Reddit API Wrapper) to securely access Reddit's API and is designed to support a frontend application by providing JSON formatted data.
 
 ## Setup
 
@@ -12,30 +11,30 @@ This Python script fetches your saved posts and comments from Reddit. It uses PR
 
 ### Dependencies
 
-Install the required Python packages using pip:
+To run the script, you need to install a few Python packages. Use pip to install the required packages:
 
 ```bash
-pip install praw python-dotenv inquirer
+pip install praw python-dotenv inquirer pytz
 ```
 
 ### Reddit API Credentials
 
-1. Visit [Reddit's App Preferences](https://www.reddit.com/prefs/apps) to create a new application.
+1. Go to [Reddit's App Preferences](https://www.reddit.com/prefs/apps) to create a new application.
 2. Click on "Create App" or "Create Another App".
 3. Fill out the form:
-    - name: Your application's name
-    - application type: Script
-    - description: (Optional)
-    - about url: (Optional)
-    - permissions: (Optional)
-    - redirect uri: http://localhost:8080 (or any valid URI)
-4. Once created, note your `client_id` (below the application name) and `client_secret`.
+   - name: Your application's name
+   - application type: Script
+   - description: (Optional)
+   - about url: (Optional)
+   - permissions: (Optional)
+   - redirect uri: http://localhost:8080 (or any valid URI)
+4. After creation, note your `client_id` (below the application name) and `client_secret`.
 
 ### Environment File
 
-Create a `.env` file in the root directory of your script with your Reddit API credentials and account details:
+Create a `.env` file in the root directory of your script containing your Reddit API credentials and account details:
 
-```js
+```plaintext
 REDDIT_CLIENT_ID=your_client_id
 REDDIT_CLIENT_SECRET=your_client_secret
 REDDIT_USERNAME=your_reddit_username
@@ -44,21 +43,22 @@ REDDIT_PASSWORD=your_reddit_password
 
 ## Usage
 
-Run the script with Python:
+Run the script using Python to fetch all your saved posts and comments from Reddit. The script prompts whether to fetch new data if previous data exists:
 
 ```bash
 python fetchItems.py
 ```
 
-The script fetches all your saved posts and comments from Reddit.
+The script processes and categorizes the items, then saves them in a JSON file, making it easy to integrate with a frontend application to display the data.
 
 ## JSON File Format
 
-The JSON output (`saved_items.json`) has the following format
+The JSON output (`saved_items.json`) includes detailed categorization, allowing for efficient data visualization:
 
 ```json
 {
-  "last_pulled": "UTC timestamp of last fetch",
+  "last_fetched_on": "Last fetch timestamp in IST",
+  "last_fetch_duration": "Fetch duration in seconds",
   "counts": {
     "subreddits": {
       "SubredditName": {
@@ -75,19 +75,18 @@ The JSON output (`saved_items.json`) has the following format
         "posts": 0,
         "comments": 0
       },
-      {"1000-10000": {
+      "1000-10000": {
         "posts": 0,
         "comments": 0
-      }},
-      {"10000-100000": {
+      },
+      "10000-100000": {
         "posts": 0,
         "comments": 0
-      }},
-      {"100000-1000000": {
+      },
+      "100000-1000000": {
         "posts": 0,
         "comments": 0
-      }}
-
+      }
     },
     "dates": {
       "YYYY-MM": {
@@ -107,7 +106,6 @@ The JSON output (`saved_items.json`) has the following format
         "datetime": "Post Creation UTC",
         "votes": "Number of Upvotes",
         "nsfw": true/false
-  
       }
     ],
     "comments": [
@@ -126,7 +124,6 @@ The JSON output (`saved_items.json`) has the following format
 }
 ```
 
-
 ## Note
 
-Ensure you have the required permissions and adhere to Reddit's API usage rules and guidelines.
+This script includes interactive elements that require user input during execution. Make sure to run it in an environment that supports stdin, such as a command-line interface. Adhere to Reddit's API usage rules and guidelines to avoid any restrictions on your account.
