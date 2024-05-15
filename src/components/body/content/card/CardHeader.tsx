@@ -32,7 +32,7 @@ const CardHeader: React.FC<CardHeaderProps> = ({
         target="_blank"
         rel="noopener noreferrer"
       >
-        {author}
+        u/{author}
       </a>{" "}
       {datetime}
     </Typography>
