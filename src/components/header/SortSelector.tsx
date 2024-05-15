@@ -31,6 +31,7 @@ const SortSelector: React.FC<SortSelectorProps> = ({
         }}
       >
         <MenuItem value="saved">Saved</MenuItem>
+        <MenuItem value="reverse">Reverse</MenuItem>
         <MenuItem value="newest">Newest</MenuItem>
         <MenuItem value="oldest">Oldest</MenuItem>
         <MenuItem value="highest_votes">Highest Votes</MenuItem>

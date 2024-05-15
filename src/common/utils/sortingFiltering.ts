@@ -7,6 +7,12 @@ export const sortData = (data: SavedItems, currentSort: string): SavedItems => {
   let sortedComments = [...data.content.comments];
 
   switch (currentSort) {
+    case "saved":
+      break;
+    case "reverse":
+      sortedPosts.reverse();
+      sortedComments.reverse();
+      break;
     case "newest":
       sortedPosts.sort(
         (a, b) =>
@@ -35,8 +41,7 @@ export const sortData = (data: SavedItems, currentSort: string): SavedItems => {
       sortedPosts.sort((a, b) => b.votes - a.votes);
       sortedComments.sort((a, b) => b.votes - a.votes);
       break;
-    case "saved":
-      break;
+
     default:
       // No default sorting applied
       break;
@@ -117,7 +122,7 @@ export const getDropdownOptions = (
           value: key,
         }))
         .sort((a, b) => a.label.localeCompare(b.label)); // Alphabetically sorts the subreddit options
-        
+
     case "year":
       return [
         ...new Set(
