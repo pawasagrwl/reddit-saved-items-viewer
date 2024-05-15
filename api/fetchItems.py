@@ -128,7 +128,7 @@ def fetch_saved_items():
                 comment_data = {
                     "post_title": item.link_title,
                     "post_subreddit": str(item.subreddit),
-                    "post_url": f"https://reddit.com{item.link_permalink}",
+                    "post_url": f"{item.link_permalink}",
                     "comment_url": f"https://reddit.com{item.permalink}",
                     "comment_text": item.body,
                     "datetime": get_readable_datetime(item.created_utc),

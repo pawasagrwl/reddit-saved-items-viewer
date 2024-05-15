@@ -7,7 +7,6 @@ import { CommentCardProps } from "../../../common/types/contentTypes";
 import CardHeader from "./card/CardHeader";
 import CardBody from "./card/CardBody";
 import CardFooter from "./card/CardFooter";
-import CardTitle from "./card/CardTitle";
 
 const CommentCard: React.FC<CommentCardProps> = ({
   postTitle,
@@ -21,8 +20,7 @@ const CommentCard: React.FC<CommentCardProps> = ({
   return (
     <Card sx={{ margin: 2 }}>
       <CardContent>
-        <CardHeader subreddit={subreddit} datetime={datetime} />
-        <CardTitle title={postTitle} />
+        <CardHeader title={postTitle} subreddit={subreddit} datetime={datetime} />
         <CardBody text={commentText} />
         <CardFooter votes={votes} url={postUrl} commentUrl={commentUrl} />
       </CardContent>
