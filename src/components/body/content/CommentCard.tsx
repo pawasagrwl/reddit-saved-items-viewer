@@ -13,6 +13,7 @@ const CommentCard: React.FC<CommentCardProps> = ({
   subreddit,
   datetime,
   commentText,
+  author,
   votes,
   postUrl,
   commentUrl,
@@ -20,7 +21,7 @@ const CommentCard: React.FC<CommentCardProps> = ({
   return (
     <Card sx={{ margin: 2 }}>
       <CardContent>
-        <CardHeader title={postTitle} subreddit={subreddit} datetime={datetime} />
+        <CardHeader title={postTitle} author = {author} subreddit={subreddit} datetime={datetime} />
         <CardBody text={commentText} />
         <CardFooter votes={votes} url={postUrl} commentUrl={commentUrl} />
       </CardContent>

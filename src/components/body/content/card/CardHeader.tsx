@@ -1,16 +1,17 @@
 // src/components/common/CardHeader.tsx
 import React from "react";
 import Typography from "@mui/material/Typography";
-import { Button } from "@mui/material";
 
 interface CardHeaderProps {
   title: string;
+  author: string;
   subreddit: string;
   datetime: string;
 }
 
 const CardHeader: React.FC<CardHeaderProps> = ({
   title,
+  author,
   subreddit,
   datetime,
 }) => (
@@ -20,11 +21,18 @@ const CardHeader: React.FC<CardHeaderProps> = ({
     </Typography>
     <Typography sx={{ mb: 1.5 }} color="text.secondary">
       <a
-        href={`https://www.reddit.com/r/${subreddit}`}
+        href={`https://www.reddit.com/r/${subreddit}/`}
         target="_blank"
         rel="noopener noreferrer"
       >
         r/{subreddit}
+      </a>{" "}
+      <a
+        href={`https://www.reddit.com/user/${author}/`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {author}
       </a>{" "}
       {datetime}
     </Typography>

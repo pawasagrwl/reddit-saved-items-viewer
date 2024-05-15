@@ -110,9 +110,12 @@ def fetch_saved_items():
             is_post = hasattr(item, 'title')
             update_counts(counts, item, is_post, vote_ranges)
             
+            author = item.author.name if item.author else "[deleted]"
+            
             if is_post:  # Post
                 post_data = {
                     "title": item.title,
+                    "author": author,
                     "url": f"https://reddit.com{item.permalink}",
                     "subreddit": str(item.subreddit),
                     "body": item.selftext if item.selftext else "",
@@ -131,6 +134,7 @@ def fetch_saved_items():
                     "post_url": f"{item.link_permalink}",
                     "comment_url": f"https://reddit.com{item.permalink}",
                     "comment_text": item.body,
+                    "author": author,
                     "datetime": get_readable_datetime(item.created_utc),
                     "votes": item.score,
                     "nsfw": item.submission.over_18
@@ -138,15 +142,15 @@ def fetch_saved_items():
                 
                 saved_items["comments"].append(comment_data)
         elapsed_time = time.time() - start_time
-        
+        fetched_on =  datetime.now(ist_zone).strftime('%Y-%m-%d %H:%M:%S IST'),
         final_output = {
-            "last_fetched_on": datetime.now(ist_zone).strftime('%Y-%m-%d %H:%M:%S IST'),
+            "last_fetched_on": fetched_on,
             "last_fetch_duration": elapsed_time,
             "counts": counts,
             "content": saved_items
         }
         
-        print(f"Completed fetching items in {elapsed_time:.2f} seconds.")
+        print(f"Completed fetching items at {fetched_on} in {elapsed_time:.2f} seconds.")
         
     except Exception as e:
         print(f"An error occurred: {e}")

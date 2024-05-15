@@ -11,6 +11,7 @@ import CardFooter from "./card/CardFooter";
 
 const PostCard: React.FC<PostCardProps> = ({
   title,
+  author,
   subreddit,
   datetime,
   body,
@@ -21,7 +22,7 @@ const PostCard: React.FC<PostCardProps> = ({
   return (
     <Card sx={{ margin: 2 }}>
       <CardContent>
-        <CardHeader title={title} subreddit={subreddit} datetime={datetime} />
+        <CardHeader title={title} author = {author} subreddit={subreddit} datetime={datetime} />
         <CardBody text={body} />
         {media && <PostMedia media={media} title={title} />}
         <CardFooter votes={votes} url={url} />

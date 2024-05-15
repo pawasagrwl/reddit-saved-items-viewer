@@ -15,6 +15,7 @@ export interface ContentTabsProps {
 
 export interface PostCardProps {
   title: string;
+  author: string;
   subreddit: string;
   datetime: string;
   body: string;
@@ -28,6 +29,7 @@ export interface CommentCardProps {
   subreddit: string;
   datetime: string;
   commentText: string;
+  author: string;
   votes: number;
   postUrl: string;
   commentUrl: string;

@@ -69,6 +69,7 @@ const ContentTabs: React.FC<ContentTabsProps> = ({ posts, comments }) => {
           <PostCard
             key={index}
             title={post.title}
+            author = {post.author}
             subreddit={post.subreddit}
             datetime={post.datetime}
             body={post.body}
@@ -86,6 +87,7 @@ const ContentTabs: React.FC<ContentTabsProps> = ({ posts, comments }) => {
             subreddit={comment.post_subreddit}
             datetime={comment.datetime}
             commentText={comment.comment_text}
+            author = {comment.author}
             votes={comment.votes}
             postUrl={comment.post_url}
             commentUrl={comment.comment_url}

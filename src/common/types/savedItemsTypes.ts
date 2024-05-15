@@ -2,6 +2,7 @@
 
 export interface Post {
   title: string;
+  author: string;
   url: string;
   subreddit: string;
   body: string;
@@ -17,6 +18,7 @@ export interface Comment {
   post_url: string;
   comment_url: string;
   comment_text: string;
+  author: string;
   datetime: string;
   votes: number;
   nsfw: boolean
