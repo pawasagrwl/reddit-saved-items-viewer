@@ -9,7 +9,9 @@ export interface Post {
   media: string;
   datetime: string;
   votes: number;
-  nsfw: boolean
+  nsfw: boolean;
+  flairs: string[];
+  archived: boolean
 }
 
 export interface Comment {
@@ -21,11 +23,12 @@ export interface Comment {
   author: string;
   datetime: string;
   votes: number;
-  nsfw: boolean
+  nsfw: boolean;
+  archived: boolean;
 }
 
 export interface Counts {
-  subreddits: { [key: string]: { posts: number; comments: number } };
+  subreddits: { [key: string]: { posts: number; comments: number; icon: string } };
   votes: { [key: string]: { posts: number; comments: number } };
   dates: { [key: string]: { posts: number; comments: number } };
 }
