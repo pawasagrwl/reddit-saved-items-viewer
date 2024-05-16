@@ -3,6 +3,7 @@ import React from "react";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import ReactMarkdown from "react-markdown";
 
 const TruncatedText: React.FC<{ text: string }> = ({ text }) => {
   const [isExpanded, setIsExpanded] = React.useState(false);
@@ -12,12 +13,15 @@ const TruncatedText: React.FC<{ text: string }> = ({ text }) => {
     <Box>
       <Typography
         variant="body2"
-        component="p"
+        component="div" // Change from "p" to "div" for block-level elements
         sx={{ whiteSpace: "pre-line", display: "inline" }}
       >
-        {isExpanded
-          ? text
-          : text.slice(0, MAX_LENGTH) + (text.length > MAX_LENGTH ? "..." : "")}
+        <ReactMarkdown>
+          {isExpanded
+            ? text
+            : text.slice(0, MAX_LENGTH) +
+              (text.length > MAX_LENGTH ? "..." : "")}
+        </ReactMarkdown>
       </Typography>
       {text.length > MAX_LENGTH && (
         <Button

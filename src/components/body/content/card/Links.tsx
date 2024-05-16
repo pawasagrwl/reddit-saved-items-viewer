@@ -16,7 +16,7 @@ const Links: React.FC<LinksProps> = ({ url, commentUrl }) => (
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      sx={{ mr: 1 }}
+      sx={{ textTransform: 'none' }}
     >
       Open Post
     </Button>
@@ -27,6 +27,7 @@ const Links: React.FC<LinksProps> = ({ url, commentUrl }) => (
         href={commentUrl}
         target="_blank"
         rel="noopener noreferrer"
+        sx={{ textTransform: 'none', ml: 1 }}
       >
         Open Comment
       </Button>

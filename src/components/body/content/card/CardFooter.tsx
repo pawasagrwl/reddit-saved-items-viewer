@@ -18,9 +18,13 @@ const CardFooter: React.FC<CardFooterProps> = ({ votes, url, commentUrl }) => (
       justifyContent: "space-between",
       alignItems: "center",
       mt: 2,
+      borderTop: "1px solid #ddd",
+      paddingTop: 1,
     }}
   >
-    <Typography>{votes} votes</Typography>
+    <Typography variant="body2" color="text.secondary">
+      {votes} votes
+    </Typography>
     <Links url={url} commentUrl={commentUrl} />
   </Box>
 );

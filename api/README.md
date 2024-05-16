@@ -63,7 +63,8 @@ The JSON output (`saved_items.json`) includes detailed categorization, allowing 
     "subreddits": {
       "SubredditName": {
         "posts": 0,
-        "comments": 0
+        "comments": 0,
+        "icon": "Subreddit icon URL"
       }
     },
     "votes": {
@@ -105,7 +106,9 @@ The JSON output (`saved_items.json`) includes detailed categorization, allowing 
         "media": "Post Media URL",
         "datetime": "Post Creation UTC",
         "votes": "Number of Upvotes",
-        "nsfw": true/false
+        "nsfw": true/false,
+        "flairs": ["Flair1", "Flair2"],
+        "archived": true/false
       }
     ],
     "comments": [
@@ -117,7 +120,8 @@ The JSON output (`saved_items.json`) includes detailed categorization, allowing 
         "comment_text": "Comment Body",
         "datetime": "Comment Creation UTC",
         "votes": "Number of Upvotes",
-        "nsfw": true/false
+        "nsfw": true/false,
+        "archived": true/false
       }
     ]
   }

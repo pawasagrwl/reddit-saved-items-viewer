@@ -46,6 +46,18 @@ def update_counts(counts, item, is_post, vote_ranges):
     date_counts = counts["dates"].setdefault(year_month, {"posts": 0, "comments": 0})
     date_counts[type_] += 1
 
+def fetch_subreddit_icon(subreddit, counts):
+    subreddit_name = subreddit.display_name
+    if subreddit_name in counts['subreddits'] and 'icon' in counts['subreddits'][subreddit_name]:
+        return counts['subreddits'][subreddit_name]['icon']
+    try:
+        icon_url = subreddit.icon_img if hasattr(subreddit, 'icon_img') else ''
+        counts['subreddits'][subreddit_name]['icon'] = icon_url
+        return icon_url
+    except Exception as e:
+        print(f"Could not fetch icon for subreddit {subreddit_name}: {e}")
+        return ''
+
 def prompt_user_to_fetch():
     question = [
         inquirer.Confirm('refetch', message="Do you want to fetch the data again?", default=False)
@@ -96,30 +108,37 @@ def fetch_saved_items():
 
             author = item.author.name if item.author else "[deleted]"
 
+            subreddit_name = str(item.subreddit if hasattr(item, 'subreddit') else item.submission.subreddit)
+            subreddit_icon = fetch_subreddit_icon(item.subreddit, counts)
+
             if is_post:
+                post_flairs = [flair.get('t', '') for flair in item.link_flair_richtext] if item.link_flair_richtext else []
                 post_data = {
                     "title": item.title,
                     "author": author,
                     "url": f"https://reddit.com{item.permalink}",
-                    "subreddit": str(item.subreddit),
+                    "subreddit": subreddit_name,
                     "body": item.selftext if item.selftext else "",
                     "media": item.url,
                     "datetime": get_readable_datetime(item.created_utc),
                     "votes": item.score,
-                    "nsfw": item.over_18
+                    "nsfw": item.over_18,
+                    "flairs": post_flairs,
+                    "archived": item.archived
                 }
                 saved_items["posts"].append(post_data)
             else:
                 comment_data = {
                     "post_title": item.link_title,
-                    "post_subreddit": str(item.subreddit),
+                    "post_subreddit": subreddit_name,
                     "post_url": f"{item.link_permalink}",
                     "comment_url": f"https://reddit.com{item.permalink}",
                     "comment_text": item.body,
                     "author": author,
                     "datetime": get_readable_datetime(item.created_utc),
                     "votes": item.score,
-                    "nsfw": item.submission.over_18
+                    "nsfw": item.submission.over_18,
+                    "archived": item.submission.archived
                 }
                 saved_items["comments"].append(comment_data)
 
