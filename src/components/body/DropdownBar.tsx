@@ -24,7 +24,7 @@ const DropdownBar: React.FC<DropdownBarProps> = ({
   nsfwOptions,
 }) => {
   const { darkMode } = useTheme();
-  const [filtersVisible, setFiltersVisible] = useState(true);
+  const [filtersVisible, setFiltersVisible] = useState(false);
   
   const resetFilters = () => {
     setSubredditFilter("");

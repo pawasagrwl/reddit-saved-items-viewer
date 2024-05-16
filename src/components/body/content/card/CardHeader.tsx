@@ -50,7 +50,7 @@ const CardHeader: React.FC<CardHeaderProps> = ({
         {datetime}
       </Typography>
     </Box>
-    <Typography variant="h6" component="div" sx={{ mt: 1 }}>
+    <Typography variant="h5" component="div" sx={{ mt: 1 }}>
       {title}
     </Typography>
   </Box>
