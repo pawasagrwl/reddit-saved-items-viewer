@@ -22,6 +22,9 @@ export interface PostCardProps {
   media: string;
   votes: number;
   url: string;
+  nsfw: boolean;
+  flairs: string[];
+  archived: boolean
 }
 
 export interface CommentCardProps {

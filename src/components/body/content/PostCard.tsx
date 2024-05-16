@@ -19,12 +19,15 @@ const PostCard: React.FC<PostCardProps> = ({
   media,
   votes,
   url,
+  flairs,
+  nsfw,
+  archived
 }) => {
   return (
     <Card sx={{ margin: 2 }}>
       <CardContent>
         <CardHeader title={title} author = {author} subreddit={subreddit} datetime={datetime} />
-        <FlairsBar flairs={["Flair1", "Flair2"]} archived={true} />
+        <FlairsBar flairs={flairs} nsfw={nsfw} archived={archived} />
 
         <CardBody text={body} />
         {media && <PostMedia media={media} title={title} />}

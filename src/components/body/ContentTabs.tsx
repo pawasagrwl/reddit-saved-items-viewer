@@ -57,7 +57,7 @@ const ContentTabs: React.FC<ContentTabsProps> = ({ posts, comments }) => {
         <Tabs
           value={value}
           onChange={handleChange}
-          aria-label="basic tabs example"
+          aria-label="post and comment tabs"
         >
           {/* Update Tab labels to show counts */}
           <Tab label={`Posts (${posts.length})`} />
@@ -76,6 +76,9 @@ const ContentTabs: React.FC<ContentTabsProps> = ({ posts, comments }) => {
             media={post.media}
             votes={post.votes}
             url={post.url}
+            flairs={post.flairs}
+            nsfw={post.nsfw}
+            archived={post.archived}
           />
         ))}
       </TabPanel>
