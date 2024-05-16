@@ -9,7 +9,7 @@ interface LinksProps {
 }
 
 const Links: React.FC<LinksProps> = ({ url, commentUrl }) => (
-  <Box>
+  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
     <Button
       variant="contained"
       size="small"

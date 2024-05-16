@@ -24,7 +24,7 @@ const Body: React.FC<BodyTypes> = ({
     : [];
   
   const filteredComments = savedItems
-    ? filterComments(savedItems.content.comments, subredditFilter, yearFilter, votesFilter, nsfwFilter,)
+    ? filterComments(savedItems.content.comments, subredditFilter, yearFilter, votesFilter, nsfwFilter)
     : [];
 
   const subredditOptions = savedItems ? getDropdownOptions(savedItems, "subreddit") : [];
@@ -55,7 +55,7 @@ const Body: React.FC<BodyTypes> = ({
           votesOptions={votesOptions}
         />
       </div>
-      <div style={{ maxHeight: 'calc(100vh - 200px)', overflowY: 'auto' }}>
+      <div style={{ overflowY: 'auto' }}>
         <ContentTabs posts={filteredPosts} comments={filteredComments} />
       </div>
     </>
