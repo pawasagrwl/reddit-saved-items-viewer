@@ -27,3 +27,5 @@ api/.env
 saved_items.json
 public/saved_items.json
 .env
+
+/venv
