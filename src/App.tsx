@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import Header from "./components/Header";
 import { ThemeProvider } from "./common/context/ThemeContext";
 import CssBaseline from "@mui/material/CssBaseline";
 import { useTheme } from "./common/context/ThemeContext";
-
+import debounce from "lodash/debounce";
 import Footer from "./components/Footer";
 import Body from "./components/Body";
 import {
@@ -19,12 +19,25 @@ const App: React.FC = () => {
   const [votesFilter, setVotesFilter] = useState("");
   const { darkMode, toggleTheme } = useTheme();
   const [searchTerm, setSearchTerm] = useState<string>("");
-  
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
+
   const theme = createTheme({
     palette: {
       mode: darkMode ? "dark" : "light",
     },
   });
+
+  const handleSearchChange = useCallback(
+    debounce((value: string) => {
+      setDebouncedSearchTerm(value);
+    }, 300),
+    []
+  );
+  
+  const onSearchInputChange = (value: string) => {
+    setSearchTerm(value);
+    handleSearchChange(value);
+  };
 
   return (
     <ThemeProvider>
@@ -36,7 +49,7 @@ const App: React.FC = () => {
           handleSortChange={setCurrentSort}
           currentSort={currentSort}
           searchTerm={searchTerm}
-          handleSearchChange={setSearchTerm}
+          handleSearchChange={onSearchInputChange}
         />
         <Body
           subredditFilter={subredditFilter}
@@ -48,6 +61,7 @@ const App: React.FC = () => {
           votesFilter={votesFilter}
           setVotesFilter={setVotesFilter}
           currentSort={currentSort}
+          searchTerm={debouncedSearchTerm}
         />
         <Footer />
       </MUIThemeProvider>

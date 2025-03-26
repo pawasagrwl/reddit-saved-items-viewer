@@ -15,16 +15,22 @@ const Body: React.FC<BodyTypes> = ({
   setNsfwFilter,
   votesFilter,
   setVotesFilter,
-  currentSort
+  currentSort,
+  searchTerm
 }) => {
   const { savedItems } = useSavedItems(currentSort);
 
   const filteredPosts = savedItems
-    ? filterPosts(savedItems.content.posts, subredditFilter, yearFilter, votesFilter, nsfwFilter)
+    ? filterPosts(savedItems.content.posts, subredditFilter, yearFilter, votesFilter, nsfwFilter).filter((post) =>
+      post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      post.body.toLowerCase().includes(searchTerm.toLowerCase())
+    )
     : [];
   
   const filteredComments = savedItems
-    ? filterComments(savedItems.content.comments, subredditFilter, yearFilter, votesFilter, nsfwFilter)
+    ? filterComments(savedItems.content.comments, subredditFilter, yearFilter, votesFilter, nsfwFilter).filter((comment) =>
+      comment.comment_text.toLowerCase().includes(searchTerm.toLowerCase())
+    )
     : [];
 
   const subredditOptions = savedItems ? getDropdownOptions(savedItems, "subreddit") : [];

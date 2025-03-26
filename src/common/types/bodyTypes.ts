@@ -8,4 +8,5 @@ export interface BodyTypes {
   votesFilter: string;
   setVotesFilter: React.Dispatch<React.SetStateAction<string>>;
   currentSort: string;
+  searchTerm: string;
 }
